@@ -1,0 +1,8 @@
+# docker-compose up -d
+services:
+  app:
+    image: nginx:latest
+    volumes:
+      - ./webapp:/usr/share/nginx/html
+    ports:
+      - 80:80
