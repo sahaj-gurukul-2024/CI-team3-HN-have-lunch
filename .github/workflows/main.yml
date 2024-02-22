@@ -85,3 +85,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOSTNAME }}
           REMOTE_USER: ${{ secrets.USER }}
           TARGET: "/var/www/html/prod/"
+          BASE_URL: "/prod/"
