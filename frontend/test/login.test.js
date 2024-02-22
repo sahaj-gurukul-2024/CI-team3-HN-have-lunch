@@ -8,6 +8,7 @@ describe("Get Index", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
+    console.log(`http://${process.env.VITE_SERVER_URL}/`);
     await driver.get(`http://${process.env.VITE_SERVER_URL}/`);
   });
 
