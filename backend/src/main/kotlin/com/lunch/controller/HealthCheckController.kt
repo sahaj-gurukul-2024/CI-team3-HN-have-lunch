@@ -1,4 +1,4 @@
-package com.lunch.controllers
+package com.lunch.controller
 
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
