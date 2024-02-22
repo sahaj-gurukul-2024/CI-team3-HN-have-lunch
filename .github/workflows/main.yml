@@ -16,6 +16,7 @@ jobs:
       - name: build
         run: |
           cd frontend
+          npm ci
           npm run build
 
       - name: deploy to uat
@@ -62,6 +63,7 @@ jobs:
       - name: build
         run: |
           cd frontend
+          npm ci
           npm run build
 
       - name: deploy to uat
