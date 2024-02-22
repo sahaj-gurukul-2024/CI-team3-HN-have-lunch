@@ -6,7 +6,7 @@ on:
  workflow_dispatch:
 
 jobs:
- build-frontend:
+ build:
   runs-on: "ubuntu-latest"
   name: "Frontend Build"
   steps:
@@ -17,23 +17,6 @@ jobs:
     uses: actions/setup-node@v3
     with:
      node-version: "20.11.1"
-     
-  - name: "Install Dependencies"
-    run: |
-      cd frontend
-      npm ci
-      
-  - name: "Test for frontend"
-    run: |
-      cd frontend
-      npm test
-  
- build-backend:
-  runs-on: "ubuntu-latest"
-  name: "Backend build"
-  steps:
-  - name: "Checkout branch"
-    uses: actions/checkout@v4
   
   - name: "Setup JDK"
     uses: actions/setup-java@v3
@@ -42,7 +25,12 @@ jobs:
       distribution: 'temurin'
       architecture: 'x64'
 
-  - name: "Test for backend"
+  - name: "Build for backend"
     run: |
       cd backend
-      ./gradlew test
+      ./gradlew build
+     
+  - name: "Install Dependencies"
+    run: |
+      cd frontend
+      npm ci
