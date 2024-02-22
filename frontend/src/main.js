@@ -9,15 +9,20 @@ async function login(event) {
         id,
         name
     }
-    const response = await fetch(`http://3.88.227.174:8080/uat`,{
+    const response = await fetch(`http://${env.VITE_BACKEND_SERVER_URL}:${env.VITE_BACKEND_SERVER_PORT}/login`,{
         body : JSON.stringify(loginData),
         method : "POST",
-        headers : {
-            "Content-Type" : "application/json"
+        headers: {
+            "Content-Type":"application/json"
         }
     })
 
     const data = await response.json()
 
-    console.log(loginData)
+    localStorage.setItem("login",JSON.stringify(data))
+    
+    window.location.href="home.html"
 }
+
+document.getElementsByTagName("form")[0].onsubmit = login
+
