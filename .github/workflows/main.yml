@@ -6,25 +6,37 @@ on:
  workflow_dispatch:
 
 jobs:
- buildAndtest:
+ build-frontend:
   runs-on: "ubuntu-latest"
-  name: "Continuous Integration"
+  name: "Frontend Build"
   steps:
   - name: "Checkout branch"
-    uses: actions/checkout@v1
+    uses: actions/checkout@v4
   
   - name: "Setup Node"
     uses: actions/setup-node@v3
     with:
       node-version: "20.11.1"
-  
-  - name: "Install dependencies"
+
+  - name: "Test for frontend"
     run: |
       cd frontend
-      npm i
+      npm ci
+      npm test
+
   
-  - name: "Run Unit tests"
+ build-backend:
+  runs-on: "ubuntu-latest"
+  name: "Backend build"
+  steps:
+  - name: "Setup JDK"
+    uses: actions/setup-java@v3
+    with:
+      java-version: '21'
+      distribution: 'temurin'
+      architecture: 'x64'
+
+  - name: "Test for backend"
     run: |
-      cd frontend
-      npm run test
-  
+      cd backend
+      ./gradlew test
