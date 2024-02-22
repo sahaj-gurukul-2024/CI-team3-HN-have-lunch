@@ -47,6 +47,10 @@ jobs:
 
     - name: "Setup Chrome"
       uses: browser-actions/setup-chrome@v1
+
+    - name: "Set Env variables"
+      env:
+        VITE_SERVER_URL: {{ secrets.VITE_SERVER_URL }}
       
     - name: "Run Tests"
       run: |
