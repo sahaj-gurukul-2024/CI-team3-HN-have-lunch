@@ -1,12 +1,14 @@
+require('dotenv').config()
+
 const chrome = require('selenium-webdriver/chrome');
 const {By, Builder} = require('selenium-webdriver');
-const {assert} = require("assert");
+const assert = require("assert");
 
 describe("Get Index", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-    await driver.get(`http://3.88.227.174/uat`);
+    await driver.get(`http://${process.env.VITE_SERVER_URL}:${process.env.VITE_PORT}/`);
   });
 
   after(async () => {
