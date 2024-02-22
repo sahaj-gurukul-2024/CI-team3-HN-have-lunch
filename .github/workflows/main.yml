@@ -41,5 +41,5 @@ jobs:
 
   - name: "Test for backend"
     run: |
-      cd ../backend
+      cd backend
       ./gradlew test
