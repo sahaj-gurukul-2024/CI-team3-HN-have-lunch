@@ -1,0 +1,1 @@
+document.getElementById("name").textContent = JSON.parse(localStorage.getItem("login")).name
