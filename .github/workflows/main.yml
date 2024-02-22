@@ -17,13 +17,16 @@ jobs:
     uses: actions/setup-node@v3
     with:
      node-version: "20.11.1"
-
-  - name: "Test for frontend"
+     
+  - name: "Install Dependencies"
     run: |
       cd frontend
       npm ci
+      
+  - name: "Test for frontend"
+    run: |
+      cd frontend
       npm test
-
   
  build-backend:
   runs-on: "ubuntu-latest"
