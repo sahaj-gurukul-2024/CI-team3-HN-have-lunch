@@ -1,8 +1,4 @@
-import {config} from "dotenv"
-config()
 const env = import.meta.env
-
-console.log("Hello")
 
 async function login(event) {
     event.preventDefault()
