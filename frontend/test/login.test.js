@@ -6,11 +6,11 @@ const assert = require("assert");
 
 const baseUrl = `http://${process.env.VITE_HOST_URL}:${process.env.VITE_HOST_PORT}`
 
-describe("Should have correct elements", () => {
+describe("Login page should have correct elements", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-    await driver.get(baseUrl);
+    await driver.get(`${baseUrl}/login`);
   });
 
   after(async () => {
@@ -35,7 +35,7 @@ describe("Should work properly with user journey from login to home", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-    await driver.get(baseUrl);
+    await driver.get(`${baseUrl}/login`);
   });
 
   after(async () => {
@@ -69,6 +69,6 @@ describe("Should work properly with user journey from login to home", () => {
     await driver.sleep(100)
 
     const browserUrl = await driver.getCurrentUrl()
-    assert.equal(browserUrl.split("/").pop(), "home")
+    assert.equal(browserUrl.split("/").pop(), "")
   });
 });

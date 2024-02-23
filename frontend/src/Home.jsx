@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { path } from "./utils/constants";
 
 function Home() {
   const baseUrl = useContext(UrlContext);
@@ -38,12 +39,12 @@ function Home() {
 
   function logout() {
     localStorage.removeItem("login");
-    navigate("/", { replace: true });
+    navigate(path.home, { replace: true });
   }
 
   useEffect(() => {
     if (localStorage.getItem("login") == null) {
-      navigate("/", { replace: true });
+      navigate(path.login, { replace: true });
     }
 
     setEmployeeData(JSON.parse(localStorage.getItem("login")));

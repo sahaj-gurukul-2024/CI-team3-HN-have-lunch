@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { path } from "./utils/constants";
 
 function App() {
   const navigate = useNavigate();
@@ -29,14 +30,14 @@ function App() {
 
       localStorage.setItem("login", JSON.stringify(data));
 
-      navigate("/home", { replace: true });
+      navigate(path.home, { replace: true });
     }
   }
 
   return (
     <Container>
       <h1>Welcome to Office Lunch Tracker</h1>
-      <Link to="/admin">Go to Admin</Link>
+      <Link to={path.admin}>Go to Admin</Link>
       <Form onSubmit={login}>
         <Form.Group className="mb-3" controlId="employeeId">
           <Form.Label>Employee Id</Form.Label>

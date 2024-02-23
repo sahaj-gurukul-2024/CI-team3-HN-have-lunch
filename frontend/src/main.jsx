@@ -1,31 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import Home from "./Home.jsx";
-import Admin from "./Admin.jsx";
+
 import "bootstrap/dist/css/bootstrap.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { UrlContext } from "./context/UrlContext.js";
+import { baseUrl, router } from "./utils/constants.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-  },
-]);
 
-const baseUrl = `http://${import.meta.env.VITE_API_URL}:${
-  import.meta.env.VITE_API_PORT
-}`;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
