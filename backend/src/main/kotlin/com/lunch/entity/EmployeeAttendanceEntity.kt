@@ -11,6 +11,7 @@ import java.util.Date
     name = "attendance",
     uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("employee_id", "date"))]
 )
+
 @Serdeable
 data class EmployeeAttendanceEntity(
     @Id
