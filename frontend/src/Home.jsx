@@ -68,7 +68,7 @@ function Home() {
             type="date"
             required
             onChange={(e) => {
-              setName(e.target.value);
+              setDate(e.target.value);
             }}
           />
         </Form.Group>
@@ -81,7 +81,7 @@ function Home() {
             name="choice"
             type="radio"
             required
-            onChange={(e) => setLunchStatus("no")}
+            onChange={(e) => setLunchStatus("yes")}
           />
           <Form.Check
             inline
