@@ -6,35 +6,29 @@ import { useContext, useEffect, useState } from "react"
 function Home() {
     const baseUrl = useContext(UrlContext)
     const navigate = useNavigate()
+    const [date, setDate] = useState("")
+    const [lunchStatus, setLunchStatus] = useState("")
 
     const [employeeData, setEmployeeData] = useState("")
-
-    async function updateChoice(event) {
-        event.preventDefault();
-        const date = new Date(
-          document.getElementById("date").value
-        ).toLocaleDateString();
-        const no = document.getElementById("no");
-        let status = "yes";
-        if (no.checked) status = "no";
+    
+    async function updateChoice(e) {
+        e.preventDefault();
+        console.log(date)
+        const isoDate = new Date(date).toISOString();
         const response = await fetch(
           `${baseUrl}attendance`,
           {
             body: JSON.stringify({
               employee: employeeData,
-              date,
-              status,
+              date: isoDate,
+              status: lunchStatus,
             }),
-            method:"POST"
+            method:"POST",
+            headers: {
+                "Content-Type":"application/json"
+            }
           }
         );
-      
-        console.log(JSON.stringify({
-            employee: employeeData,
-            date,
-            status,
-          }));
-        console.log(await response.json());
       };
 
       function logout() {
@@ -57,13 +51,13 @@ function Home() {
         <form onSubmit={updateChoice}>
             <div>
                 <label htmlFor="date">Date:</label>
-                <input type="date" id="date"/>
+                <input type="date" id="date" onChange={(e) => setDate(e.target.value)}/>
             </div>
             <div>
                 <label htmlFor="yes">Yes</label>
-                <input type="radio" name="choice" id="yes" required/> 
+                <input type="radio" name="choice" id="yes" required onChange={(e)=>setLunchStatus("yes")}/> 
                 <label htmlFor="no">No</label>
-                <input type="radio" name="choice" id="no" required/>
+                <input type="radio" name="choice" id="no" required onChange={(e)=>setLunchStatus("no")}/>
             </div>
             <button>Submit</button>
         </form>

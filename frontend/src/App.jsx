@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { UrlContext } from "./context/UrlContext"
 import { useContext, useState } from "react"
 
@@ -34,18 +34,19 @@ function App() {
   return (
     <>
       <h1>Welcome</h1>
-      
-      <Link to={"/admin"}>Go to Admin</Link>
+      <Link to="/admin">Go to Admin</Link>
       <div>
         <form onSubmit={login}>
           <div>
-            <input id="id" name="id" onChange={(event) =>{
-              setId(event.target.value)
+            <label htmlFor="id">Employee Id: </label>
+            <input id="id" name="id" onChange={(e) =>{
+              setId(e.target.value)
             }} />
           </div>
           <div>
-            <input id="name" name="name" onChange={(event) =>{
-              setName(event.target.value)
+            <label htmlFor="name">Name: </label>
+            <input id="name" name="name" onChange={(e) =>{
+              setName(e.target.value)
             }} />
           </div>
           <br />
