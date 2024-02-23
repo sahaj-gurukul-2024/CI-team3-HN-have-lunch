@@ -41,6 +41,7 @@ function App() {
         <Form.Group className="mb-3" controlId="employeeId">
           <Form.Label>Employee Id</Form.Label>
           <Form.Control
+            id="id"
             name="id"
             type="text"
             placeholder="Enter your employee id"
@@ -52,6 +53,7 @@ function App() {
         <Form.Group className="mb-3" controlId="employeeName">
           <Form.Label>Employee name</Form.Label>
           <Form.Control
+            id="name"
             name="name"
             type="text"
             placeholder="Enter your employee name"
