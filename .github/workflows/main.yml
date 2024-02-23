@@ -58,6 +58,7 @@ jobs:
       env:
         VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
         VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+        PROD: "true"
 
     - name: "Setup Chrome"
       uses: browser-actions/setup-chrome@v1
@@ -69,6 +70,7 @@ jobs:
       env:
         VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
         VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+        PROD: "true"
 
   push-to-prod:
     runs-on: "ubuntu-latest"
@@ -97,6 +99,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          PROD: "true"
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_API_PORT: ${{ secrets.VITE_API_PORT }}
           SOURCE: "frontend/dist/*"
