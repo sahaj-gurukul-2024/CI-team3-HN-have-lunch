@@ -39,7 +39,7 @@ function Home() {
 
   function logout() {
     localStorage.removeItem("login");
-    navigate(path.home, { replace: true });
+    navigate(path.login, { replace: true });
   }
 
   useEffect(() => {
@@ -53,7 +53,7 @@ function Home() {
   return (
     <Container>
       <h1 id="name">
-        Welcome {employeeData.name}{" "}
+        Welcome <span className="userName">{employeeData.name}{" "}</span>
         <span>
           <Button id="logout" onClick={logout}>
             Logout
@@ -65,8 +65,10 @@ function Home() {
         <Form.Group className="mb-3" controlId="datePicker">
           <Form.Label>Select Date</Form.Label>
           <Form.Control
+            className="datePicker"
             name="date"
             type="date"
+            min={new Date().toLocaleString().slice(0, 10).split("/").reverse().join("-")}
             required
             onChange={(e) => {
               setDate(e.target.value);
@@ -82,6 +84,7 @@ function Home() {
             name="choice"
             type="radio"
             required
+            className="preferanceStatus"
             onChange={(e) => setLunchStatus("yes")}
           />
           <Form.Check
@@ -91,6 +94,7 @@ function Home() {
             name="choice"
             type="radio"
             required
+            className="preferanceStatus"
             onChange={(e) => setLunchStatus("no")}
           />
         </Form.Group>

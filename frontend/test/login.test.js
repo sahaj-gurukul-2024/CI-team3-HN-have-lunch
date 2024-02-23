@@ -1,12 +1,12 @@
 require('dotenv').config()
 
 const chrome = require('selenium-webdriver/chrome');
-const {By, Builder, until} = require('selenium-webdriver');
+const {By, Builder} = require('selenium-webdriver');
 const assert = require("assert");
 
-const baseUrl = `http://${process.env.VITE_HOST_URL}:${process.env.VITE_HOST_PORT}`
+const baseUrl = process.env.PROD ? `http://${process.env.VITE_HOST_URL}` : `http://${process.env.VITE_HOST_URL}:${process.env.VITE_HOST_PORT}`
 
-describe("Login page should have correct elements", () => {
+describe("Login page", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
@@ -22,16 +22,31 @@ describe("Login page should have correct elements", () => {
     assert.equal("Office Lunch Tracker", title);
   });
 
-  it("should have correct body", async () => {
+  it("should have correct heading", async () => {
     const title = await driver.findElement(By.tagName('h1'));
     const titleText = await title.getText();
     assert.equal("Welcome to Office Lunch Tracker", titleText);
+  });
+
+  it("should have input for employee Id", async () => {
+    const idInput = await driver.findElement(By.id('id')).getAttribute("type");
+    assert.equal("text", idInput);
+  });
+
+  it("should have input for employee Name", async () => {
+    const nameInput = await driver.findElement(By.id('name')).getAttribute("type");
+    assert.equal("text", nameInput);
+  });
+
+  it("should have login button", async () => {
+    const buttonText = await driver.findElement(By.tagName('button')).getText();
+    assert.equal("Login", buttonText);
   });
 });
 
 
 
-describe("Should work properly with user journey from login to home", () => {
+describe("User in login page", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
@@ -42,14 +57,14 @@ describe("Should work properly with user journey from login to home", () => {
     await driver.quit();
   })
 
-  it("should enter correct id", async () => {
+  it("should be able to enter employee id", async () => {
     const idInputBox = await driver.findElement(By.id("id"));
     await idInputBox.sendKeys("123")
     const id = await idInputBox.getAttribute("value");
     assert.equal("123", id);
   });
 
-  it("should enter correct employee name", async () => {
+  it("should be able enter employee name", async () => {
     const nameInputBox = await driver.findElement(By.id("name"));
     await nameInputBox.sendKeys("abc")
     const name = await nameInputBox.getAttribute("value");
