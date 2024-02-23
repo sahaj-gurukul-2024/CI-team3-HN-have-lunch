@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { UrlContext } from "./context/UrlContext"
 import { useContext, useState } from "react"
 
@@ -34,7 +34,8 @@ function App() {
   return (
     <>
       <h1>Welcome</h1>
-      <a>Go to Admin</a>
+      
+      <Link to={"/admin"}>Go to Admin</Link>
       <div>
         <form onSubmit={login}>
           <div>
