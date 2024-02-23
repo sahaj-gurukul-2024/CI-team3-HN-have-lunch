@@ -1,24 +1,19 @@
 import { useNavigate } from "react-router-dom"
 import { UrlContext } from "./context/UrlContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 
 function App() {
   const navigate = useNavigate()
+  const [id, setId] = useState(null)
+  const [name, setName] = useState(null)
 
   const baseUrl = useContext(UrlContext)
 
   async function login(e) {
-    const env = import.meta.env
-    console.log(env)
     e.preventDefault()
-    const id = document.getElementById("id").value
-    const name = document.getElementById("name").value
+    const loginData = {id, name}
 
-    const loginData = {
-        id,
-        name
-    }
     const response = await fetch(`${baseUrl}login`,{
         body : JSON.stringify(loginData),
         method : "POST",
@@ -32,7 +27,7 @@ function App() {
   
       localStorage.setItem("login",JSON.stringify(data)) 
       
-      navigate("/login", { replace: true })
+      navigate("/home", { replace: true })
     }
   }
 
@@ -43,10 +38,14 @@ function App() {
       <div>
         <form onSubmit={login}>
           <div>
-            <input id="id" name="id" />
+            <input id="id" name="id" onChange={(event) =>{
+              setId(event.target.value)
+            }} />
           </div>
           <div>
-            <input id="name" name="name" />
+            <input id="name" name="name" onChange={(event) =>{
+              setName(event.target.value)
+            }} />
           </div>
           <br />
           <div>
