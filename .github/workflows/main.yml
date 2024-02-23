@@ -26,8 +26,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html/uat/
-            rm -rf *
+            cd /var/www/html/
+            rm -rf uat
 
       - name: deploy to uat
         uses: easingthemes/ssh-deploy@v2.1.5 
@@ -56,7 +56,9 @@ jobs:
         cd frontend
         npm ci
       env:
-        VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+        VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
+        VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+        PROD: "true"
 
     - name: "Setup Chrome"
       uses: browser-actions/setup-chrome@v1
@@ -66,7 +68,9 @@ jobs:
         cd frontend
         npm test
       env:
-        VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+        VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
+        VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+        PROD: "true"
 
   push-to-prod:
     runs-on: "ubuntu-latest"
@@ -88,13 +92,16 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html/uat/
-            rm -rf *
+            cd /var/www/html/
+            rm -rf prod
 
-      - name: deploy to uat
+      - name: deploy to prod
         uses: easingthemes/ssh-deploy@v2.1.5 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          PROD: "true"
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_PORT: ${{ secrets.VITE_API_PORT }}
           SOURCE: "frontend/dist/*"
           REMOTE_HOST: ${{ secrets.HOSTNAME }}
           REMOTE_USER: ${{ secrets.USER }}
