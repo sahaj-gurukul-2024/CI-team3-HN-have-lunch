@@ -24,13 +24,13 @@ function Home() {
             }),
             method:"POST",
             headers: {
-                "Content-Type":"application/json"
+                "Content-Type": "application/json"
             }
           }
         );
 
         if(response.status === 200) {
-          navigate("/", {replace: true})
+            alert(`Successfully submitted the status for the specified date with ${lunchStatus}`)
         }
       };
 
