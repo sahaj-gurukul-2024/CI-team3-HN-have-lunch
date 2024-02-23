@@ -4,12 +4,13 @@ const chrome = require('selenium-webdriver/chrome');
 const {By, Builder} = require('selenium-webdriver');
 const assert = require("assert");
 
+const baseUrl = `http://${process.env.VITE_HOST_URL}:${process.env.VITE_HOST_PORT}/`
+
 describe("Get Index", () => {
   let driver;
   before(async () => {
     driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().addArguments('--headless')).build();
-    console.log(`http://${process.env.VITE_SERVER_URL}/`);
-    await driver.get(`http://${process.env.VITE_SERVER_URL}/`);
+    await driver.get(baseUrl);
   });
 
   after(async () => {

@@ -1,5 +1,7 @@
-import { defineConfig } from "vite"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
+<<<<<<< Updated upstream
 const Mode = process.env.APP_BASE_HREF || '';
 
 export default defineConfig({
@@ -10,3 +12,9 @@ export default defineConfig({
         }
     }
 })
+=======
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+>>>>>>> Stashed changes
