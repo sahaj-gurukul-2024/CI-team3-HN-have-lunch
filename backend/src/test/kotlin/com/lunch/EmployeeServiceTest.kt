@@ -20,6 +20,7 @@ class EmployeeServiceTest(
         val createdEmployee = employeeService.getOrUpdateOrCreateEmployee(employee)
 
         assertEquals(employee, createdEmployee)
+
         employeeRepository.delete(employee)
     }
 
@@ -32,6 +33,7 @@ class EmployeeServiceTest(
         val createdEmployee = employeeService.getOrUpdateOrCreateEmployee(employeeNew)
 
         assertEquals(employeeNew.name, createdEmployee.name)
+
         employeeRepository.delete(createdEmployee)
     }
 
@@ -43,6 +45,7 @@ class EmployeeServiceTest(
         val createdEmployee = employeeService.getOrUpdateOrCreateEmployee(employee)
 
         assertEquals(employee, createdEmployee)
+
         employeeRepository.delete(employee)
     }
 }

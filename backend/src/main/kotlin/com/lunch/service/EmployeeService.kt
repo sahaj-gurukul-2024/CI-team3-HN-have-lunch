@@ -7,10 +7,10 @@ import jakarta.inject.Singleton
 @Singleton
 class EmployeeService(private val employeeRepository: EmployeeRepository) {
     fun getOrUpdateOrCreateEmployee(employeeEntity: EmployeeEntity): EmployeeEntity {
-        val employees = employeeRepository.getAllById(employeeEntity.id)
-        if (employees.isEmpty()) {
+        val employee = employeeRepository.getById(employeeEntity.id)
+        if (employee == null) {
             employeeRepository.save(employeeEntity)
-        } else if (employeeEntity.name != employees.first().name) {
+        } else if (employeeEntity.name != employee.name) {
             employeeRepository.update(employeeEntity)
         }
         return employeeEntity
