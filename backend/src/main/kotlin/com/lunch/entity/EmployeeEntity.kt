@@ -15,6 +15,7 @@ data class EmployeeEntity(
     @Id
     @Column(name = "id")
     val id: Int,
+
     @Column(name = "name")
     val name: String
 )

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 @MicronautTest
 class HealtzControllerTest(@Client("/") val client: HttpClient) {
     @Test
-    fun testHello() {
+    fun `healthz endpoint should be working`() {
         val request: HttpRequest<Any> = HttpRequest.GET("/healthz")
         val body = client.toBlocking().retrieve(request)
         assertNotNull(body)
