@@ -10,7 +10,7 @@ import io.micronaut.http.annotation.Post
 
 @Controller
 class EmployeeAttendanceController(private val employeeAttendanceService: EmployeeAttendanceService) {
-    @Post(uri = "/login", consumes = [MediaType.APPLICATION_JSON], produces = [MediaType.APPLICATION_JSON])
+    @Post(uri = "/attendance", consumes = [MediaType.APPLICATION_JSON], produces = [MediaType.APPLICATION_JSON])
     fun addOrUpdateAttendance(@Body attendance: EmployeeAttendanceEntity): HttpResponse<EmployeeAttendanceEntity> {
         return HttpResponse.ok(employeeAttendanceService.addEmployeeAttendance(attendance))
     }
