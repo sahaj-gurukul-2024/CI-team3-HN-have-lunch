@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build-prod": "vite build",
+    "build-uat": "vite build --mode staging",
     "preview": "vite preview",
     "test": "npx mocha test/*.test.js --timeout 6000"
   },
