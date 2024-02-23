@@ -27,6 +27,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOSTNAME }}
           REMOTE_USER: ${{ secrets.USER }}
           TARGET: "/var/www/html/uat/"
+
   run-bdd:
     runs-on: "ubuntu-latest"
     name: "Frontend Build"
@@ -39,13 +40,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: "20.11.1"
-
-    - name: "Setup JDK"
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        architecture: 'x64'
         
     - name: "Install Dependencies"
       run: |
