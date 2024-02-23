@@ -26,8 +26,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html/uat/
-            rm -rf *
+            cd /var/www/html/
+            rm -rf uat
 
       - name: deploy to uat
         uses: easingthemes/ssh-deploy@v2.1.5 
@@ -92,8 +92,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/html/uat/
-            rm -rf *
+            cd /var/www/html/
+            rm -rf prod
 
       - name: deploy to prod
         uses: easingthemes/ssh-deploy@v2.1.5 
