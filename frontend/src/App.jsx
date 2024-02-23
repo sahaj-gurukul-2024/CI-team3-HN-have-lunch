@@ -14,7 +14,7 @@ function App() {
     e.preventDefault()
     const loginData = {id, name}
 
-    const response = await fetch(`${baseUrl}login`,{
+    const response = await fetch(`${baseUrl}/login`,{
         body : JSON.stringify(loginData),
         method : "POST",
         headers: {

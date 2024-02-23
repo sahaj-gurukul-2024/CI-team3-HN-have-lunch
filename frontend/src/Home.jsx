@@ -13,10 +13,9 @@ function Home() {
     
     async function updateChoice(e) {
         e.preventDefault();
-        console.log(date)
         const isoDate = new Date(date).toISOString();
         const response = await fetch(
-          `${baseUrl}attendance`,
+          `${baseUrl}/attendance`,
           {
             body: JSON.stringify({
               employee: employeeData,
@@ -29,11 +28,15 @@ function Home() {
             }
           }
         );
+
+        if(response.status === 200) {
+          navigate("/", {replace: true})
+        }
       };
 
       function logout() {
         localStorage.removeItem("login");
-        window.location.href = "index.html";
+        navigate("/", {replace: true})
       };
 
     useEffect(()=> {
