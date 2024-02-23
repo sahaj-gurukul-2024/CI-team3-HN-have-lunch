@@ -25,7 +25,7 @@ describe("Should have correct elements", () => {
   it("should have correct body", async () => {
     const title = await driver.findElement(By.tagName('h1'));
     const titleText = await title.getText();
-    assert.equal("Welcome", titleText);
+    assert.equal("Welcome to Office Lunch Tracker", titleText);
   });
 });
 
