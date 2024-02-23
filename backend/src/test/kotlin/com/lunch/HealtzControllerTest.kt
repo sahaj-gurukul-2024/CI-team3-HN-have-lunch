@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
 @MicronautTest
-class HealtzServiceTest(@Client("/") val client: HttpClient) {
+class HealtzControllerTest(@Client("/") val client: HttpClient) {
     @Test
     fun testHello() {
         val request: HttpRequest<Any> = HttpRequest.GET("/healthz")
