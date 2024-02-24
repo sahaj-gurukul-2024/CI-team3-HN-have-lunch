@@ -1,24 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { UrlContext } from "./context/UrlContext";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { path } from "./utils/constants";
+import {apiEndpoints} from "./utils/apiEndpoints";
 
 function Home() {
-  const baseUrl = useContext(UrlContext);
   const navigate = useNavigate();
+
   const [date, setDate] = useState("");
   const [lunchStatus, setLunchStatus] = useState("");
-
   const [employeeData, setEmployeeData] = useState("");
 
   async function updateChoice(e) {
     e.preventDefault();
     const isoDate = new Date(date).toISOString();
-    const response = await fetch(`${baseUrl}/attendance`, {
+    const response = await fetch(apiEndpoints.attendance, {
       body: JSON.stringify({
         employee: employeeData,
         date: isoDate,
@@ -98,7 +97,7 @@ function Home() {
             onChange={(e) => setLunchStatus("no")}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="submitPreferance">
           Submit
         </Button>
       </Form>

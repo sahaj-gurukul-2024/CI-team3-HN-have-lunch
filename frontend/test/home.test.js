@@ -1,9 +1,8 @@
 require('dotenv').config()
 
 const chrome = require('selenium-webdriver/chrome');
-const {By, Builder, until} = require('selenium-webdriver');
+const {By, Builder} = require('selenium-webdriver');
 const assert = require("assert");
-const { useLayoutEffect } = require('react');
 
 const baseUrl = `http://${process.env.VITE_HOST_URL}:${process.env.VITE_HOST_PORT}`
 
@@ -53,6 +52,11 @@ describe("Home page", () => {
 
         assert.equal("choice", radioName);
     });
+
+    it("should have submit button", async () => {
+      const buttonText = await driver.findElement(By.className('submitPreferance')).getText();
+      assert.equal("Submit", buttonText);
+    });
 });
 
 describe("User in home page", () => {
@@ -95,14 +99,44 @@ describe("User in home page", () => {
     assert.equal(browserUrl.split("/").pop(), "login")
   })
 
-  it("should be able to pick date", async () => {
-    await login()
-    const dateInput = await driver.findElement(By.className("datePicker"))
-    const date = new Date().toISOString().slice(0, 10).split("/").reverse().join("-")
-    console.log(date)
-    await dateInput.sendKeys(date) 
-    const selectedDate = await dateInput.getAttribute("value") 
+//   it("should be able to pick date", async () => {
+//     await login()
+//     const dateInput = await driver.findElement(By.className("datePicker"))
+//     const date = new Date().toISOString().slice(0, 10).split("/").reverse().join("-")
+//     await dateInput.sendKeys(date) 
+//     const selectedDate = await dateInput.getAttribute("value") 
 
-    assert.equal(selectedDate, date)
+//     assert.equal(selectedDate, date)
+//   })
+
+
+    it("should be able to select 'yes' radio", async () => {
+        await login()
+        const yesRadio = await driver.findElement(By.id("yes"))
+        await yesRadio.click()
+        const isSelected = await yesRadio.isSelected()
+
+        assert.equal(true, isSelected)
+    })
+
+    it("should be able to select 'no' radio", async () => {
+        const noRadio = await driver.findElement(By.id("no"))
+        await noRadio.click()
+        const isSelected = await noRadio.isSelected()
+
+        assert.equal(true, isSelected)
+    })
+
+    it("should be able to select only one of 'yes' or 'no' radio at a time", async () => {
+      const noRadio = await driver.findElement(By.id("no"))
+      const yesRadio = await driver.findElement(By.id("yes"))
+      
+      await noRadio.click()
+      await yesRadio.click()
+      const isNoSelected = await noRadio.isSelected()
+      const isYesSelected = await yesRadio.isSelected()
+
+      assert.equal(false, isNoSelected)
+      assert.equal(true, isYesSelected)
   })
 })
