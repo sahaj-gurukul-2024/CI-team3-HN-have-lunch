@@ -4,5 +4,6 @@ export const baseUrl = import.meta.env.PROD ? `http://${import.meta.env.VITE_API
 
 export const apiEndpoints = {
     "employeeLogin": `${baseUrl}/login`,
-    "attendance": `${baseUrl}/attendance`
+    "attendance": `${baseUrl}/attendance`,
+    "attendanceCount": `${baseUrl}/admin`
 }

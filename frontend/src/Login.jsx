@@ -33,11 +33,11 @@ function App() {
   }
 
   return (
-    <Container>
+    <Container className="d-flex flex-column align-items-center justify-content-center vh-100 w-50">
       <h1>Welcome to Office Lunch Tracker</h1>
-      <Link to={path.admin}>Go to Admin</Link>
-      <Form onSubmit={login}>
-        <Form.Group className="mb-3" >
+      
+      <Form onSubmit={login} className="align-self-stretch">
+        <Form.Group className="mt-5 mb-4" >
           <Form.Label>Employee Id</Form.Label>
           <Form.Control
             id="id"
@@ -49,7 +49,7 @@ function App() {
             }}
           />
         </Form.Group>
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-5" >
           <Form.Label>Employee name</Form.Label>
           <Form.Control
             id="name"
@@ -61,9 +61,13 @@ function App() {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
+        <div className="cta d-flex justify-content-between">
+          <Button variant="primary" type="submit" className="w-100">
+            Login
+          </Button>
+          <div className="me-3" />
+          <Link to={path.admin} className="bg-primary btn text-light w-100">Go to Admin</Link>
+        </div>
       </Form>
     </Container>
   );

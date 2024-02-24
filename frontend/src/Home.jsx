@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Toast from 'react-bootstrap/Toast';
 import { path } from "./utils/constants";
 import {apiEndpoints} from "./utils/apiEndpoints";
 
 function Home() {
   const navigate = useNavigate();
 
+  const [show, setShow] = useState(false);
   const [date, setDate] = useState("");
   const [lunchStatus, setLunchStatus] = useState("");
   const [employeeData, setEmployeeData] = useState("");
@@ -30,9 +32,7 @@ function Home() {
     });
 
     if (response.status === 200) {
-      alert(
-        `Successfully submitted the status for the specified date with ${lunchStatus}`
-      );
+      setShow(true)
     }
   }
 
@@ -50,7 +50,15 @@ function Home() {
   }, []);
 
   return (
-    <Container>
+    <Container className="d-flex flex-column justify-content-center align-items-center vh-100 w-50">
+      <Toast onClose={() => setShow(false)} show={show} className="position-absolute top-0 end-0" animation autohide delay={1000}>
+          <Toast.Header>
+            <strong>Preferance Noted</strong>
+            <small> </small>
+          </Toast.Header>
+          <Toast.Body>Successfully submitted the status for {date} as {lunchStatus.toUpperCase()}</Toast.Body>
+      </Toast>
+
       <h1 id="name">
         Welcome <span className="userName">{employeeData.name}{" "}</span>
         <span>
@@ -97,7 +105,7 @@ function Home() {
             onChange={(e) => setLunchStatus("no")}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="submitPreferance">
+        <Button variant="primary" type="submit" className="submitPreferance w-100">
           Submit
         </Button>
       </Form>
