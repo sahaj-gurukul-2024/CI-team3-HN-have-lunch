@@ -14,7 +14,7 @@ function Home() {
 
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [lunchStatus, setLunchStatus] = useState("");
+  const [lunchStatus, setLunchStatus] = useState("NOT_SPECIFIED");
   const [employeeData, setEmployeeData] = useState("");
 
   async function updateChoice(e) {
@@ -92,7 +92,7 @@ function Home() {
               type="radio"
               required
               className="preferanceStatus"
-              onChange={(e) => setLunchStatus("yes")}
+              onChange={(e) => setLunchStatus("YES")}
             />
             <Form.Check
               inline
@@ -102,7 +102,7 @@ function Home() {
               type="radio"
               required
               className="preferanceStatus mt-3"
-              onChange={(e) => setLunchStatus("no")}
+              onChange={(e) => setLunchStatus("NO")}
             />
           </Form.Group>
           <Button variant="primary" type="submit" className="submitPreferance w-100 mt-4">
