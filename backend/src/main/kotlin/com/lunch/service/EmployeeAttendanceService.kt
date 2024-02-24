@@ -4,7 +4,6 @@ import com.lunch.entity.EmployeeAttendanceEntity
 import com.lunch.repository.EmployeeAttendanceRepository
 import com.lunch.repository.EmployeeRepository
 import jakarta.inject.Singleton
-import java.util.*
 
 @Singleton
 class EmployeeAttendanceService(private val employeeAttendanceRepository: EmployeeAttendanceRepository, private val employeeRepository: EmployeeRepository) {

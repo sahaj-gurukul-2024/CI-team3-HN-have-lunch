@@ -6,8 +6,7 @@ import io.micronaut.core.convert.format.Format
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import java.util.Date
-import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 @Controller
 class AdminController(private val adminService: AdminService) {
@@ -15,7 +14,7 @@ class AdminController(private val adminService: AdminService) {
     @Get("/admin/{date}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    fun getEmployeeCountForDate(@Format("yyyy-MM-dd'T'HH:mm:ss") @PathVariable("date") date: Date): HttpResponse<EmployeeAttendanceCountEntry> {
+    fun getEmployeeCountForDate(@Format("yyyy-MM-dd") @PathVariable("date") date: LocalDate): HttpResponse<EmployeeAttendanceCountEntry> {
         return HttpResponse.ok(adminService.getEmployeeCountOnDate(date))
     }
 

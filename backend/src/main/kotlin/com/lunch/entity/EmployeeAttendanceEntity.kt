@@ -3,13 +3,13 @@ package com.lunch.entity
 import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.serde.annotation.Serdeable
 import jakarta.persistence.*
-import java.util.Date
+import java.time.LocalDate
 
 @Entity
 @MappedEntity
 @Table(
     name = "attendance",
-    uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("employee_id", "date"))]
+    uniqueConstraints = [UniqueConstraint(columnNames = ["employee_id", "date"])]
 )
 @Serdeable
 data class EmployeeAttendanceEntity(
@@ -18,7 +18,7 @@ data class EmployeeAttendanceEntity(
     @Column(name = "id")
     val id: Int? = null,
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     val employee: EmployeeEntity,
 
@@ -26,7 +26,7 @@ data class EmployeeAttendanceEntity(
     val status: AttendanceStatus,
 
     @Column(name = "date", columnDefinition = "DATE")
-    val date: Date,
+    val date: LocalDate,
 )
 
 enum class AttendanceStatus {
