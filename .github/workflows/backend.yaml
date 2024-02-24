@@ -63,7 +63,7 @@ jobs:
 
   push-to-prod:
     runs-on: "ubuntu-latest"
-    needs: run-bdd
+    needs: run-tests
     name: "Push to Prod"
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SOURCE: "backend/build/libs/*"
+          SOURCE: "backend/HaveLunch/bin/net8.0/Release/publish/*"
           REMOTE_HOST: ${{ secrets.HOSTNAME }}
           REMOTE_USER: ${{ secrets.USER }}
-          TARGET: "/home/ubuntu/backend/"
+          TARGET: "/home/ubuntu/backend/dotnet/"
