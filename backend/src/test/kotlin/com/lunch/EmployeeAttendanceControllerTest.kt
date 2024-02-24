@@ -15,7 +15,7 @@ class EmployeeAttendanceControllerTest(@Client("/attendance") val client: HttpCl
 
     @Test
     fun `employee should be able to mark their attendance`() {
-        val employeeAttendance = mapOf("employee" to mapOf("id" to 1, "name" to "abc"), "date" to "2023-01-20T12:17:00Z", "status" to "YES")
+        val employeeAttendance = mapOf("employee" to mapOf("id" to 1, "name" to "abc"), "date" to "2023-01-20", "status" to "YES")
         val request: HttpRequest<Any> = HttpRequest.POST("/", employeeAttendance)
 
         val response = client.toBlocking().exchange(request, Map::class.java)
@@ -26,7 +26,7 @@ class EmployeeAttendanceControllerTest(@Client("/attendance") val client: HttpCl
 
     @Test
     fun `admin should be able to mark their attendance`() {
-        val employeeAttendance = mapOf("employee" to mapOf("id" to 1, "name" to "abc"), "date" to "2023-01-20T12:17:00Z", "status" to "YES")
+        val employeeAttendance = mapOf("employee" to mapOf("id" to 1, "name" to "abc"), "date" to "2023-01-20", "status" to "YES")
         val request: HttpRequest<Any> = HttpRequest.POST("/", employeeAttendance)
 
         val response = client.toBlocking().exchange(request, Map::class.java)
