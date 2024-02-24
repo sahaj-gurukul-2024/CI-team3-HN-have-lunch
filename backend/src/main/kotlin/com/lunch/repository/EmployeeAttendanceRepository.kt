@@ -8,9 +8,9 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 import java.util.Date
 
-@JdbcRepository(dialect = Dialect.H2)
+@JdbcRepository(dialect = Dialect.POSTGRES)
 interface EmployeeAttendanceRepository: CrudRepository<EmployeeAttendanceEntity, Int> {
-    fun getAllByEmployee(employee:EmployeeEntity): List<EmployeeAttendanceEntity>
-    @Query("SELECT COUNT(*) FROM attendance where date=:date")
+    fun getAllByEmployeeId(employeeId: Int): List<EmployeeAttendanceEntity>
+    @Query("SELECT COUNT(*) FROM attendance where date=:date and status=0")
     fun getCountByDate(date: Date): Int
 }

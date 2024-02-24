@@ -2,24 +2,20 @@ package com.lunch.controller
 
 import com.lunch.dtos.EmployeeAttendanceCountEntry
 import com.lunch.service.AdminService
+import io.micronaut.core.convert.format.Format
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.QueryValue
+import io.micronaut.http.annotation.*
 import java.util.Date
 import java.text.SimpleDateFormat
 
 @Controller
 class AdminController(private val adminService: AdminService) {
-    @Get(uri = "/admin", consumes = [MediaType.APPLICATION_JSON], produces = [MediaType.APPLICATION_JSON])
-    fun getEmployeeCount(@QueryValue(defaultValue = "") dateString: String): HttpResponse<EmployeeAttendanceCountEntry> {
-        val date = if (dateString.isNotEmpty()) {
-            val parser = SimpleDateFormat("YYYY-MM-DD")
-            parser.parse(dateString)
-        } else {
-            Date()
-        }
+
+    @Get("/admin/{date}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getEmployeeCountForDate(@Format("yyyy-MM-dd'T'HH:mm:ss") @PathVariable("date") date: Date): HttpResponse<EmployeeAttendanceCountEntry> {
         return HttpResponse.ok(adminService.getEmployeeCountOnDate(date))
     }
 

@@ -1,12 +1,12 @@
 package com.lunch.controller
 
 import com.lunch.entity.EmployeeAttendanceEntity
-import com.lunch.entity.EmployeeEntity
 import com.lunch.service.EmployeeAttendanceService
+import io.micronaut.core.convert.format.Format
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import java.text.SimpleDateFormat
+import java.util.*
 
 @Controller
 class EmployeeAttendanceController(private val employeeAttendanceService: EmployeeAttendanceService) {
@@ -17,10 +17,10 @@ class EmployeeAttendanceController(private val employeeAttendanceService: Employ
         return HttpResponse.ok(employeeAttendanceService.addEmployeeAttendance(attendance))
     }
 
-    @Get("/attendance/{empId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    fun getEmployeeHistory(@PathVariable("empId") empId: Int): HttpResponse<List<EmployeeAttendanceEntity>> {
-        return HttpResponse.ok(employeeAttendanceService.getEmployeeHistory(empId))
-    }
+//    @Get("/attendance/{empId}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    fun getEmployeeHistory(@PathVariable("empId") empId: Int): HttpResponse<List<EmployeeAttendanceEntity>> {
+//        return HttpResponse.ok(employeeAttendanceService.getEmployeeHistory(empId))
+//    }
 }

@@ -4,6 +4,7 @@ import com.lunch.entity.EmployeeAttendanceEntity
 import com.lunch.repository.EmployeeAttendanceRepository
 import com.lunch.repository.EmployeeRepository
 import jakarta.inject.Singleton
+import java.util.*
 
 @Singleton
 class EmployeeAttendanceService(private val employeeAttendanceRepository: EmployeeAttendanceRepository, private val employeeRepository: EmployeeRepository) {
@@ -14,7 +15,8 @@ class EmployeeAttendanceService(private val employeeAttendanceRepository: Employ
 
     fun getEmployeeHistory(empId: Int): List<EmployeeAttendanceEntity> {
 
-        val employee = employeeRepository.getById(empId)!!
-        return employeeAttendanceRepository.getAllByEmployee(employee)
+        val employee = employeeRepository.getById(empId) ?: return listOf()
+
+        return employeeAttendanceRepository.getAllByEmployeeId(employeeId = employee.id)
     }
 }

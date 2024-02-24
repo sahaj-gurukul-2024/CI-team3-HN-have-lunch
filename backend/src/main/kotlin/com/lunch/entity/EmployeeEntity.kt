@@ -9,7 +9,7 @@ import jakarta.persistence.Table
 
 @Entity
 @MappedEntity
-@Table(name = "employees")
+@Table(name = "employee")
 @Serdeable
 data class EmployeeEntity(
     @Id

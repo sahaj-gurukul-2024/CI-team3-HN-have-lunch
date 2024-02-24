@@ -11,7 +11,6 @@ import java.util.Date
     name = "attendance",
     uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("employee_id", "date"))]
 )
-
 @Serdeable
 data class EmployeeAttendanceEntity(
     @Id
@@ -20,7 +19,7 @@ data class EmployeeAttendanceEntity(
     val id: Int? = null,
 
     @ManyToOne
-    @JoinColumns(JoinColumn(name = "employee_id", referencedColumnName = "id"))
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     val employee: EmployeeEntity,
 
     @Column(name = "status")
