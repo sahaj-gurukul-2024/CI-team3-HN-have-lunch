@@ -14,7 +14,7 @@ function Admin() {
 
   useEffect(() => {
     const getEmployeeCount = async () => {
-      const response = await fetch(`${apiEndpoints.attendanceCount}/${getDate(date)}`, {
+      const response = await fetch(`${apiEndpoints.attendanceCount}?date=${getDate(date)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,3 @@
-using HaveLunch.Models;
 using HaveLunch.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +21,7 @@ public class AdminController(IAdminService adminService) : Controller
         }
     }
 
-    [HttpGet]
+    [HttpGet("list")]
     public async Task<IActionResult> GetLunchAttendanceList(string date, int page = 1)
     {
         try
