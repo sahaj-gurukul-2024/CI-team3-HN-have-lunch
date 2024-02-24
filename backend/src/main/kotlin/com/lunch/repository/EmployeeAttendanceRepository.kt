@@ -11,6 +11,6 @@ import java.util.Date
 @JdbcRepository(dialect = Dialect.POSTGRES)
 interface EmployeeAttendanceRepository: CrudRepository<EmployeeAttendanceEntity, Int> {
     fun getAllByEmployeeId(employeeId: Int): List<EmployeeAttendanceEntity>
-    @Query("SELECT COUNT(*) FROM attendance where date=:date and status=0")
+    @Query("SELECT COUNT(Distinct(employee_id)) FROM attendance where date=:date and status=0")
     fun getCountByDate(date: Date): Int
 }
