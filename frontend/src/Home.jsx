@@ -59,7 +59,7 @@ function Home() {
           <Toast.Body>Successfully submitted the status for {date} as {lunchStatus.toUpperCase()}</Toast.Body>
       </Toast>
 
-      <h1 id="name">
+      <h1 id="name" className="mb-5">
         Welcome <span className="userName">{employeeData.name}{" "}</span>
         <span>
           <Button id="logout" onClick={logout}>
@@ -101,11 +101,11 @@ function Home() {
             name="choice"
             type="radio"
             required
-            className="preferanceStatus"
+            className="preferanceStatus mt-3"
             onChange={(e) => setLunchStatus("no")}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="submitPreferance w-100">
+        <Button variant="primary" type="submit" className="submitPreferance w-100 mt-4">
           Submit
         </Button>
       </Form>

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -31,6 +31,12 @@ function App() {
       navigate(path.home, { replace: true });
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("login") != null) {
+      navigate(path.home, { replace: true });
+    }
+  }, [])
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center vh-100 w-50">
