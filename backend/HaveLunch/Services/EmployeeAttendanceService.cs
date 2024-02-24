@@ -23,12 +23,12 @@ public class EmployeeAttendanceService(AppDbContext appDbContext) : IEmployeeAtt
         {
             throw new Exception("Invalid Attendance Status");
         }
-        var employee = await appDbContext.Employees.FirstOrDefaultAsync(x => x.Id == request.EmployeeId) 
+        var employee = await appDbContext.Employees.FirstOrDefaultAsync(x => x.Id == request.Employee.Id) 
                         ?? throw new Exception("Employee Not Found!");
         var employeeAttendance = await appDbContext
                                     .EmployeeAttendances
                                     .Include(x => x.Employee)
-                                    .FirstOrDefaultAsync(x => x.Id == request.Id && x.EmployeeId == request.EmployeeId);
+                                    .FirstOrDefaultAsync(x => x.EmployeeId == request.Employee.Id);
         if(employeeAttendance == null)
         {
             employeeAttendance = new EmployeeAttendance

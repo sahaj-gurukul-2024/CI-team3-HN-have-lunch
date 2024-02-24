@@ -12,12 +12,12 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
         {
             throw new Exception("Invalid Attendance Status");
         }
-        if(request.Id == 1 && request.EmployeeId == 1)
+        if(request.Employee.Id == 1)
         {
             return Task.FromResult(new EmployeeAttendanceResponse
             {
-                Id = request.Id,
-                EmployeeId = request.EmployeeId,
+                Id = 1,
+                EmployeeId = request.Employee.Id,
                 EmployeeName = "Bruce",
                 Date = request.Date,
                 Status = request.Status
@@ -25,8 +25,8 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
         }
         return Task.FromResult(new EmployeeAttendanceResponse
             {
-                Id = request.Id,
-                EmployeeId = request.EmployeeId,
+                Id = 2,
+                EmployeeId = request.Employee.Id,
                 EmployeeName = "Bruce",
                 Date = request.Date,
                 Status = request.Status

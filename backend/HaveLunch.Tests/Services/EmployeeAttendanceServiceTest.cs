@@ -81,8 +81,7 @@ public class EmployeeAttendanceServiceTest
 
         var model = new EmployeeAttendanceRequest()
         {
-            Id = employeeAttendances[0].Id,
-            EmployeeId = employeeAttendances[0].EmployeeId,
+            Employee = new EmployeeResponse(employeeAttendances[0].EmployeeId, employeeAttendances[0].Employee.Name),
             Date = employeeAttendances[0].Date,
             Status = status
         };
@@ -106,8 +105,7 @@ public class EmployeeAttendanceServiceTest
 
         var model = new EmployeeAttendanceRequest()
         {
-            Id = employeeAttendances[0].Id,
-            EmployeeId = employeeAttendances[0].EmployeeId,
+            Employee = new EmployeeResponse(employeeAttendances[0].EmployeeId, employeeAttendances[0].Employee.Name),
             Date = employeeAttendances[0].Date,
             Status = AttendanceStatus.NOT_SPECIFIED
         };

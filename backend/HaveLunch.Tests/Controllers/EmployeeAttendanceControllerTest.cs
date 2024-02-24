@@ -70,8 +70,7 @@ public class EmployeeAttendanceControllerTest
 
         var request = new EmployeeAttendanceRequest()
         {
-            Id = 1,
-            EmployeeId = 1,
+            Employee = new EmployeeResponse(1, "Bruce"),
             Date = dateTime,
             Status = AttendanceStatus.YES
         };
@@ -94,8 +93,7 @@ public class EmployeeAttendanceControllerTest
 
         var request = new EmployeeAttendanceRequest()
         {
-            Id = 1,
-            EmployeeId = 1,
+            Employee = new EmployeeResponse(1, "Bruce"),
             Date = dateTime,
             Status = AttendanceStatus.NOT_SPECIFIED
         };
