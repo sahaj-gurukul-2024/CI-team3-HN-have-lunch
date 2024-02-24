@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import { apiEndpoints } from './utils/apiEndpoints';
 import Loader from "./Loader.jsx"
+import { getDate } from './utils/date.js';
 
 
 function Admin() {
@@ -13,7 +14,7 @@ function Admin() {
 
   useEffect(() => {
     const getEmployeeCount = async () => {
-      const response = await fetch(`${apiEndpoints.attendanceCount}/${date.toISOString()}`, {
+      const response = await fetch(`${apiEndpoints.attendanceCount}/${getDate(date)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

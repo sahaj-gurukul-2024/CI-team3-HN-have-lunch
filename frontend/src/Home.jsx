@@ -7,22 +7,22 @@ import Button from "react-bootstrap/Button";
 import Toast from 'react-bootstrap/Toast';
 import { path } from "./utils/constants";
 import {apiEndpoints} from "./utils/apiEndpoints";
+import { getDate } from "./utils/date";
 
 function Home() {
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [lunchStatus, setLunchStatus] = useState("");
   const [employeeData, setEmployeeData] = useState("");
 
   async function updateChoice(e) {
     e.preventDefault();
-    const isoDate = new Date(date).toISOString();
     const response = await fetch(apiEndpoints.attendance, {
       body: JSON.stringify({
         employee: employeeData,
-        date: isoDate,
+        date: getDate(date),
         status: lunchStatus,
       }),
       method: "POST",
@@ -77,8 +77,9 @@ function Home() {
             type="date"
             min={new Date().toLocaleString().slice(0, 10).split("/").reverse().join("-")}
             required
+            value={date.toLocaleDateString().split("/").reverse().join("-")}
             onChange={(e) => {
-              setDate(e.target.value);
+              setDate(new Date(e.target.value));
             }}
           />
         </Form.Group>
