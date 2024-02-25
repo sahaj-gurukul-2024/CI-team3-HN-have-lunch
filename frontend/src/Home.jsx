@@ -14,16 +14,16 @@ function Home() {
 
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [lunchStatus, setLunchStatus] = useState("NOT_SPECIFIED");
+  const [lunchStatus, setLunchStatus] = useState(null);
   const [employeeData, setEmployeeData] = useState("");
 
   async function updateChoice(e) {
     e.preventDefault();
-    const response = await fetch(apiEndpoints.attendance, {
+    const response = await fetch(apiEndpoints.employeeAttendance, {
       body: JSON.stringify({
         employee: employeeData,
         date: getDate(date),
-        status: lunchStatus,
+        status: lunchStatus ?? "NOT_SPECIFIED",
       }),
       method: "POST",
       headers: {
@@ -48,7 +48,24 @@ function Home() {
 
     setEmployeeData(JSON.parse(localStorage.getItem("login")));
   }, []);
+  
+  useEffect(() => {
+    const getStatus = async () => {
+      const employeeData = JSON.parse(localStorage.getItem("login"))
+      const response = await fetch(`${apiEndpoints.employeeAttendance}/${employeeData.id}?date=${getDate(date)}`, {
+        method: "GET",
+      });  
+      if (response.status === 200) {
+        const data = await response.json()
+        setLunchStatus(data.status)
+      }
+    }
 
+    getStatus()
+  }, [date])
+
+
+  console.log(lunchStatus)
   return (
     <>
       <Toast onClose={() => setShow(false)} show={show}  className="position-absolute top-0 end-0" animation autohide delay={1000}>
@@ -56,7 +73,7 @@ function Home() {
             <strong>Preferance Noted</strong>
             <small> </small>
           </Toast.Header>
-          <Toast.Body>Successfully submitted the status for {getDate(date)} as {lunchStatus.toUpperCase()}</Toast.Body>
+          <Toast.Body>Successfully submitted the status for {getDate(date)} as {lunchStatus?.toUpperCase()}</Toast.Body>
       </Toast>
       <Container className="d-flex flex-column justify-content-center align-items-center vh-100 w-50">
         <h1 id="name" className="mb-5">
@@ -92,6 +109,7 @@ function Home() {
               type="radio"
               required
               className="preferanceStatus"
+              checked={lunchStatus == "YES" ? true : false}
               onChange={(e) => setLunchStatus("YES")}
             />
             <Form.Check
@@ -102,6 +120,7 @@ function Home() {
               type="radio"
               required
               className="preferanceStatus mt-3"
+              checked={lunchStatus == "NO" ? true : false}
               onChange={(e) => setLunchStatus("NO")}
             />
           </Form.Group>
