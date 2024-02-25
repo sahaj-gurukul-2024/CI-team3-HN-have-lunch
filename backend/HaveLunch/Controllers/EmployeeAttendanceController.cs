@@ -13,11 +13,11 @@ public class EmployeeAttendanceController(IEmployeeAttendanceService employeeAtt
     {
         try
         {
-            if(!DateTime.TryParse(date, out var dateTime))
+            if(!DateOnly.TryParse(date, out var dateOnly))
             {
-                dateTime = DateTime.UtcNow.Date;
+                dateOnly = DateOnly.FromDateTime(DateTime.Today);
             }
-            return Ok(await employeeAttendanceService.GetEmployeeAttendanceDetail(employeeId, dateTime.Date));
+            return Ok(await employeeAttendanceService.GetEmployeeAttendanceDetail(employeeId, dateOnly));
         }
         catch (Exception e)
         {

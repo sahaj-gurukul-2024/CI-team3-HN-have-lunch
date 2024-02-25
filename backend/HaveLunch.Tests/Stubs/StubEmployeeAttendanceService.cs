@@ -33,7 +33,7 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
             });
     }
 
-    public Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateTime date)
+    public Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateOnly date)
     {
         var response = new EmployeeAttendanceResponse
         {
@@ -45,7 +45,7 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
             response.Id = 1;
             response.EmployeeId = 1;
             response.EmployeeName = "Bruce";
-            if(date == new DateTime(2023, 5, 25).ToUniversalTime() || date == new DateTime(2023, 5, 26).ToUniversalTime())
+            if(date == new DateOnly(2023, 5, 25) || date == new DateOnly(2023, 5, 26))
             {
                 response.Status = AttendanceStatus.YES;
             }
@@ -55,11 +55,11 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
             response.Id = 2;
             response.EmployeeId = 2;
             response.EmployeeName = "Alfred";
-            if(date == new DateTime(2023, 5, 25).ToUniversalTime())
+            if(date == new DateOnly(2023, 5, 25))
             {
                 response.Status = AttendanceStatus.YES;
             }
-            else if(date == new DateTime(2023, 5, 26).ToUniversalTime())
+            else if(date == new DateOnly(2023, 5, 26))
             {
                 response.Status = AttendanceStatus.NO;
             }
@@ -76,8 +76,8 @@ public class StubEmployeeAttendanceService : IEmployeeAttendanceService
         if(employeeId == 1)
         {
             List<EmployeeAttendanceResponse> responses = [
-                new () { Id = 1, EmployeeId = 1, EmployeeName = "Bruce", Date = new DateTime(2023, 5, 25).ToUniversalTime(), Status = AttendanceStatus.YES },
-                new () { Id = 2, EmployeeId = 1, EmployeeName = "Bruce", Date = new DateTime(2023, 5, 26).ToUniversalTime(), Status = AttendanceStatus.NO }
+                new () { Id = 1, EmployeeId = 1, EmployeeName = "Bruce", Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
+                new () { Id = 2, EmployeeId = 1, EmployeeName = "Bruce", Date = new DateOnly(2023, 5, 26), Status = AttendanceStatus.NO }
             ];
             return Task.FromResult(responses);
         }

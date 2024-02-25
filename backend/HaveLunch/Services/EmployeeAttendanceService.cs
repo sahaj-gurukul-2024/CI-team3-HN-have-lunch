@@ -10,7 +10,7 @@ public interface IEmployeeAttendanceService
 {
     Task<EmployeeAttendanceResponse> CreateOrUpdateEmployeeAttendance(EmployeeAttendanceRequest request);
 
-    Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateTime date);
+    Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateOnly date);
 
     Task<List<EmployeeAttendanceResponse>> GetEmployeeAttendanceHistory(int employeeId, int page = 1);
 }
@@ -34,7 +34,7 @@ public class EmployeeAttendanceService(AppDbContext appDbContext) : IEmployeeAtt
             employeeAttendance = new EmployeeAttendance
             {
                 Employee = employee,
-                Date = request.Date.ToUniversalTime(),
+                Date = request.Date,
                 Status = request.Status
             };
             await appDbContext.EmployeeAttendances.AddAsync(employeeAttendance);
@@ -55,7 +55,7 @@ public class EmployeeAttendanceService(AppDbContext appDbContext) : IEmployeeAtt
         };
     }
 
-    public async Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateTime date)
+    public async Task<EmployeeAttendanceResponse> GetEmployeeAttendanceDetail(int employeeId, DateOnly date)
     {
         var employee = await appDbContext.Employees.FirstOrDefaultAsync(x => x.Id == employeeId) 
                             ?? throw new Exception("Employee Not Found!");

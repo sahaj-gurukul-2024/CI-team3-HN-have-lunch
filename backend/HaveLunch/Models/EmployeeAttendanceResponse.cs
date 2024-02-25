@@ -9,7 +9,7 @@ public class EmployeeAttendanceResponse
     public int EmployeeId { get; set; }
     public string EmployeeName { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
 
     public AttendanceStatus Status { get; set; }
 }

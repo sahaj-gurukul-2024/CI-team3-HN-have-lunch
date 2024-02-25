@@ -1,6 +1,7 @@
-using HaveLunch.Entities;
 using HaveLunch.Models;
 using HaveLunch.Services;
+
+namespace HaveLunch.Tests.Stubs;
 
 public class StubEmployeeService : IEmployeeService
 {

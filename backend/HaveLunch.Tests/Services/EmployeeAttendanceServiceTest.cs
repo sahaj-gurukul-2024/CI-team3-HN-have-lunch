@@ -28,12 +28,12 @@ public class EmployeeAttendanceServiceTest
     public async Task GetEmployeeAttendanceDetail_ShouldReturnStatus_ForGivenEmployeeOnGivenDate()
     {
         List<EmployeeAttendance> employeeAttendances = [
-            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateTime(2023, 5, 25), Status = AttendanceStatus.YES },
+            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
         ];
         dbContext.Setup(x => x.EmployeeAttendances).ReturnsDbSet(employeeAttendances);
         var service = new EmployeeAttendanceService(dbContext.Object);
 
-        var result = await service.GetEmployeeAttendanceDetail(1, new DateTime(2023, 5, 25));
+        var result = await service.GetEmployeeAttendanceDetail(1, new DateOnly(2023, 5, 25));
 
         Assert.Equal(employeeAttendances[0].Id, result.Id);
         Assert.Equal(employeeAttendances[0].EmployeeId, result.EmployeeId);
@@ -47,7 +47,7 @@ public class EmployeeAttendanceServiceTest
         dbContext.Setup(x => x.EmployeeAttendances).ReturnsDbSet([]);
         var service = new EmployeeAttendanceService(dbContext.Object);
 
-        var date = new DateTime(2023, 5, 25);
+        var date = new DateOnly(2023, 5, 25);
         var result = await service.GetEmployeeAttendanceDetail(employees[0].Id, date);
 
         Assert.Equal(0, result.Id);
@@ -64,7 +64,7 @@ public class EmployeeAttendanceServiceTest
         var service = new EmployeeAttendanceService(dbContext.Object);
 
         await Assert.ThrowsAsync<Exception>(async () => {
-            var result = await service.GetEmployeeAttendanceDetail(3, new DateTime(2023, 5, 25));
+            var result = await service.GetEmployeeAttendanceDetail(3, new DateOnly(2023, 5, 25));
         });
     }
 
@@ -74,7 +74,7 @@ public class EmployeeAttendanceServiceTest
     public async Task CreateOrUpdateEmployeeAttendance_ShouldMarkStatus_ForGivenEmployeeOnSelectDate(AttendanceStatus status)
     {
         List<EmployeeAttendance> employeeAttendances = [
-            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateTime(2023, 5, 25), Status = AttendanceStatus.YES },
+            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
         ];
         dbContext.Setup(x => x.EmployeeAttendances).ReturnsDbSet(employeeAttendances);
         var service = new EmployeeAttendanceService(dbContext.Object);
@@ -98,7 +98,7 @@ public class EmployeeAttendanceServiceTest
     public async Task CreateOrUpdateEmployeeAttendance_ShouldThrowException_WhenMarkInvalidStatus()
     {
         List<EmployeeAttendance> employeeAttendances = [
-            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateTime(2023, 5, 25), Status = AttendanceStatus.YES },
+            new() { Id = 1, Employee = employees[0], EmployeeId = 1, Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
         ];
         dbContext.Setup(x => x.EmployeeAttendances).ReturnsDbSet(employeeAttendances);
         var service = new EmployeeAttendanceService(dbContext.Object);

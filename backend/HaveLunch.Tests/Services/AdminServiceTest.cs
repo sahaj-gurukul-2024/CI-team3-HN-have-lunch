@@ -17,11 +17,11 @@ public class AdminServiceTest
     ];
 
     private static readonly List<EmployeeAttendance> employeeAttendances = [
-        new() { Id = 1, EmployeeId = 1, Employee = employees[0], Date = new DateTime(2023, 5, 25), Status = AttendanceStatus.YES },
-        new() { Id = 2, EmployeeId = 2, Employee = employees[1], Date = new DateTime(2023, 5, 25), Status = AttendanceStatus.YES },
-        new() { Id = 3, EmployeeId = 1, Employee = employees[0], Date = new DateTime(2023, 5, 26), Status = AttendanceStatus.YES },
-        new() { Id = 4, EmployeeId = 2, Employee = employees[1], Date = new DateTime(2023, 5, 26), Status = AttendanceStatus.NO },
-        new() { Id = 5, EmployeeId = 1, Employee = employees[0], Date = new DateTime(2023, 5, 27), Status = AttendanceStatus.NO },
+        new() { Id = 1, EmployeeId = 1, Employee = employees[0], Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
+        new() { Id = 2, EmployeeId = 2, Employee = employees[1], Date = new DateOnly(2023, 5, 25), Status = AttendanceStatus.YES },
+        new() { Id = 3, EmployeeId = 1, Employee = employees[0], Date = new DateOnly(2023, 5, 26), Status = AttendanceStatus.YES },
+        new() { Id = 4, EmployeeId = 2, Employee = employees[1], Date = new DateOnly(2023, 5, 26), Status = AttendanceStatus.NO },
+        new() { Id = 5, EmployeeId = 1, Employee = employees[0], Date = new DateOnly(2023, 5, 27), Status = AttendanceStatus.NO },
     ];
 
     private readonly Mock<AppDbContext> dbContext;
@@ -38,9 +38,9 @@ public class AdminServiceTest
     {
         var service = new AdminService(dbContext.Object);
 
-        var result1 = await service.GetLunchAttendanceCount(new DateTime(2023, 5, 25));
-        var result2 = await service.GetLunchAttendanceCount(new DateTime(2023, 5, 26));
-        var result3 = await service.GetLunchAttendanceCount(new DateTime(2023, 5, 27));
+        var result1 = await service.GetLunchAttendanceCount(new DateOnly(2023, 5, 25));
+        var result2 = await service.GetLunchAttendanceCount(new DateOnly(2023, 5, 26));
+        var result3 = await service.GetLunchAttendanceCount(new DateOnly(2023, 5, 27));
 
         Assert.Equal(2, result1.Count);
         Assert.Equal(1, result2.Count);
@@ -52,7 +52,7 @@ public class AdminServiceTest
     {
         var service = new AdminService(dbContext.Object);
 
-        var result = await service.GetLunchAttendanceList(new DateTime(2023, 5, 25));
+        var result = await service.GetLunchAttendanceList(new DateOnly(2023, 5, 25));
 
         Assert.Contains(new EmployeeResponse(1, "Bruce"), result);
     }

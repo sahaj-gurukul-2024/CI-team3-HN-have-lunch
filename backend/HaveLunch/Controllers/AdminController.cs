@@ -12,8 +12,8 @@ public class AdminController(IAdminService adminService) : Controller
     {
         try
         {
-            var dateTime = DateTime.Parse(date).ToUniversalTime();
-            return Ok(await adminService.GetLunchAttendanceCount(dateTime));
+            var dateOnly = DateOnly.Parse(date);
+            return Ok(await adminService.GetLunchAttendanceCount(dateOnly));
         }
         catch (Exception ex)
         {
@@ -26,8 +26,8 @@ public class AdminController(IAdminService adminService) : Controller
     {
         try
         {
-            var dateTime = DateTime.Parse(date).ToUniversalTime();
-            return Ok(await adminService.GetLunchAttendanceList(dateTime, page));
+            var dateOnly = DateOnly.Parse(date);
+            return Ok(await adminService.GetLunchAttendanceList(dateOnly, page));
         }
         catch (Exception ex)
         {

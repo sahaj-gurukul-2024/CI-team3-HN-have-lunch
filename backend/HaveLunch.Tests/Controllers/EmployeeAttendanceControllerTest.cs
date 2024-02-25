@@ -21,7 +21,7 @@ public class EmployeeAttendanceControllerTest
         Assert.Equal(1, returnValue.Id);
         Assert.Equal(1, returnValue.EmployeeId);
         Assert.Equal("Bruce", returnValue.EmployeeName);
-        Assert.Equal(new DateTime(2023, 05, 25).ToUniversalTime(), returnValue.Date);
+        Assert.Equal(new DateOnly(2023, 05, 25), returnValue.Date);
         Assert.Equal(AttendanceStatus.YES, returnValue.Status);
     }
     
@@ -66,12 +66,12 @@ public class EmployeeAttendanceControllerTest
     {
         var service = new StubEmployeeAttendanceService();
         var controller = new EmployeeAttendanceController(service);
-        var dateTime = DateTime.UtcNow;
+        var dateTime = DateTime.Today;
 
         var request = new EmployeeAttendanceRequest()
         {
             Employee = new EmployeeResponse(1, "Bruce"),
-            Date = dateTime,
+            Date = DateOnly.FromDateTime(dateTime),
             Status = AttendanceStatus.YES
         };
         var result = await controller.CreateOrUpdateEmployeeAttendanceDetail(request);
@@ -80,7 +80,7 @@ public class EmployeeAttendanceControllerTest
         Assert.Equal(1, returnValue.Id);
         Assert.Equal(1, returnValue.EmployeeId);
         Assert.Equal("Bruce", returnValue.EmployeeName);
-        Assert.Equal(dateTime, returnValue.Date);
+        Assert.Equal(request.Date, returnValue.Date);
         Assert.Equal(AttendanceStatus.YES, returnValue.Status);
     }
     
@@ -89,12 +89,12 @@ public class EmployeeAttendanceControllerTest
     {
         var service = new StubEmployeeAttendanceService();
         var controller = new EmployeeAttendanceController(service);
-        var dateTime = DateTime.UtcNow;
+        var dateTime = DateTime.Today;
 
         var request = new EmployeeAttendanceRequest()
         {
             Employee = new EmployeeResponse(1, "Bruce"),
-            Date = dateTime,
+           Date = DateOnly.FromDateTime(dateTime),
             Status = AttendanceStatus.NOT_SPECIFIED
         };
         var result = await controller.CreateOrUpdateEmployeeAttendanceDetail(request);
