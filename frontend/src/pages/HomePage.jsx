@@ -50,6 +50,7 @@ function HomePage() {
   useEffect(() => {
     const getStatus = async () => {
       const employeeData = JSON.parse(localStorage.getItem("login"));
+      if (employeeData == null) return
       const response = await fetch(
         `${apiEndpoints.employeeAttendance}/${employeeData.id}?date=${getDate(date)}`,
         {
@@ -65,7 +66,6 @@ function HomePage() {
     getStatus();
   }, [date]);
 
-  console.log(lunchStatus);
   return (
     <>
       <Toast
@@ -74,10 +74,10 @@ function HomePage() {
         className="position-absolute top-0 end-0"
         animation
         autohide
-        delay={1000}
+        delay={3000}
       >
         <Toast.Header closeButton={false}>
-          <strong>Preferance Noted</strong>
+          <strong id="toast-head">Preference Noted</strong>
           <small> </small>
         </Toast.Header>
         <Toast.Body>
@@ -123,7 +123,7 @@ function HomePage() {
               name="choice"
               type="radio"
               required
-              className="preferanceStatus"
+              className="preferenceStatus"
               checked={lunchStatus == "YES" ? true : false}
               onChange={(e) => setLunchStatus("YES")}
             />
@@ -134,7 +134,7 @@ function HomePage() {
               name="choice"
               type="radio"
               required
-              className="preferanceStatus mt-3"
+              className="preferenceStatus mt-3"
               checked={lunchStatus == "NO" ? true : false}
               onChange={(e) => setLunchStatus("NO")}
             />
@@ -142,7 +142,7 @@ function HomePage() {
           <Button
             variant="primary"
             type="submit"
-            className="submitPreferance w-100 mt-4"
+            className="submitPreference w-100 mt-4"
           >
             Submit
           </Button>

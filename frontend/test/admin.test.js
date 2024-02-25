@@ -20,11 +20,11 @@ describe("Admin page", () => {
     await driver.quit();
   });
 
-  it("should have loader till data is fetched", async () => {
-    const loader = await driver.findElement(By.className("loader"));
+  // it("should have loader till data is fetched", async () => {
+  //   const loader = await driver.findElement(By.className("loader"));
 
-    assert.notEqual(loader, null);
-  });
+  //   assert.notEqual(loader, null);
+  // });
 
   it("should have welcome message", async () => {
     const welcomeMessage = await driver

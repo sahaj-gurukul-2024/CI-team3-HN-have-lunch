@@ -74,7 +74,7 @@ function AdminPage() {
           <tbody>
             {employeesDetail.map(({ name, id }, i) => {
               return (
-                <tr>
+                <tr key={id}>
                   <td>{i + 1}</td>
                   <td>{id}</td>
                   <td>{name}</td>
