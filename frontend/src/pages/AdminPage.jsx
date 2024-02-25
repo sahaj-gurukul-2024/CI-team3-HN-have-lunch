@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { getDate, apiEndpoints } from "../utils";
 import {CustomModal, Loader} from "../components";
-import { compareDate } from "../utils/date";
 
 function AdminPage() {
   const [employeeCount, setEmployeeCount] = useState(null);
