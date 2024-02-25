@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/HaveLunch/HaveLunch.Dev/Backend/
+            cd /var/www/HaveLunch/HaveLunch.Dev/Backend/
             rm -rf *
 
       - name: Push Artifacts to UAT
@@ -169,7 +169,7 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/HaveLunch/HaveLunch.Prod/Backend/
+            cd /var/www/HaveLunch/HaveLunch.Prod/Backend/
             rm -rf *
 
       - name: Push Artifacts to UAT
