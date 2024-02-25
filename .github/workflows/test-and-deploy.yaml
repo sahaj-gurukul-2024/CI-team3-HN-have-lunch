@@ -11,11 +11,13 @@ jobs:
   push-backend-to-uat:
     runs-on: "ubuntu-latest"
     name: "Push Backend to UAT"
+    defaults:
+      run:
+        working-directory: './backend/'
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          path: 'backend/'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -31,7 +33,10 @@ jobs:
       - name: Publish Backend
         run: dotnet publish HaveLunch/HaveLunch.csproj --configuration Release --no-restore --no-build
 
-      - name: Test Backend
+      - name: Build Tests
+        run: dotnet build HaveLunch.Tests/HaveLunch.Tests.csproj
+
+      - name: Run Tests
         run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
 
       - name: Clean Previous Artifacts
@@ -41,26 +46,28 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/HaveLunch/HaveLunch.Dev/
+            cd /var/HaveLunch/HaveLunch.Dev/Backend/
             rm -rf *
 
       - name: Push Artifacts to UAT
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
-          SOURCE: "HaveLunch/bin/Release/net8.0/publish/*"
+          SOURCE: "backend/HaveLunch/bin/Release/net8.0/publish/*"
           REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
           REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
-          TARGET: "/var/www/HaveLunch/HaveLunch.Dev/"
+          TARGET: "/var/www/HaveLunch/HaveLunch.Dev/Backend/"
 
   push-frontend-to-uat:
     runs-on: "ubuntu-latest"
     name: "Push Frontend to UAT"
+    defaults:
+      run:
+        working-directory: './frontend/'
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          path: 'frontend/'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -80,27 +87,29 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/www/html/uat/
+            cd /var/www/HaveLunch/HaveLunch.Dev/Frontend/
             rm -rf *
 
       - name: Push Artifacts to UAT
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SOURCE: "dist/*"
-          REMOTE_HOST: ${{ secrets.HOSTNAME }}
-          REMOTE_USER: ${{ secrets.USER }}
-          TARGET: "/var/www/html/uat/"
+          SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
+          SOURCE: "frontend/dist/*"
+          REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
+          REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
+          TARGET: "/var/www/HaveLunch/HaveLunch.Dev/Frontend/"
 
   run-bdd:
     runs-on: "ubuntu-latest"
     name: "Run BDD Tests with Selenium"
     needs: [ push-backend-to-uat, push-frontend-to-uat ]
+    defaults:
+      run:
+        working-directory: './frontend/'
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          path: 'frontend/'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -128,11 +137,13 @@ jobs:
     runs-on: "ubuntu-latest"
     name: "Push Backend to PROD"
     needs: run-bdd
+    defaults:
+      run:
+        working-directory: './frontend/'
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          path: 'backend/'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -158,27 +169,29 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/HaveLunch/HaveLunch.Prod/
+            cd /var/HaveLunch/HaveLunch.Prod/Backend/
             rm -rf *
 
       - name: Push Artifacts to UAT
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
-          SOURCE: "HaveLunch/bin/Release/net8.0/publish/*"
+          SOURCE: "backend/HaveLunch/bin/Release/net8.0/publish/*"
           REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
           REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
-          TARGET: "/var/www/HaveLunch/HaveLunch.Prod/"
+          TARGET: "/var/www/HaveLunch/HaveLunch.Prod/Backend/"
 
   push-frontend-to-prod:
     runs-on: "ubuntu-latest"
     name: "Push Frontend to PROD"
     needs: run-bdd
+    defaults:
+      run:
+        working-directory: './frontend/'
+
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-        with:
-          path: 'frontend/'
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -198,14 +211,14 @@ jobs:
           username: ${{ secrets.ALTERNATE_USER }}
           key: ${{ secrets.ALTERNATE_SSH_KEY }}
           script: |
-            cd /var/www/html/prod/
+            cd /var/www/HaveLunch/HaveLunch.Prod/Frontend/
             rm -rf *
 
       - name: Push Artifacts to UAT
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SOURCE: "dist/*"
-          REMOTE_HOST: ${{ secrets.HOSTNAME }}
-          REMOTE_USER: ${{ secrets.USER }}
-          TARGET: "/var/www/html/prod/"
+          SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
+          SOURCE: "frontend/dist/*"
+          REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
+          REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
+          TARGET: "/var/www/HaveLunch/HaveLunch.Prod/Frontend/"
