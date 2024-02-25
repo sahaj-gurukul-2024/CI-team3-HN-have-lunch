@@ -28,7 +28,7 @@ public class EmployeeAttendanceService(AppDbContext appDbContext) : IEmployeeAtt
         var employeeAttendance = await appDbContext
                                     .EmployeeAttendances
                                     .Include(x => x.Employee)
-                                    .FirstOrDefaultAsync(x => x.EmployeeId == request.Employee.Id);
+                                    .FirstOrDefaultAsync(x => x.EmployeeId == request.Employee.Id && x.Date == request.Date);
         if(employeeAttendance == null)
         {
             employeeAttendance = new EmployeeAttendance
