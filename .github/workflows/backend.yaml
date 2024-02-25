@@ -37,11 +37,11 @@ jobs:
       - name: deploy to uat
         uses: easingthemes/ssh-deploy@v2.1.5 
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SOURCE: "backend/HaveLunch/bin/net8.0/Release/publish/*"
-          REMOTE_HOST: ${{ secrets.HOSTNAME }}
-          REMOTE_USER: ${{ secrets.USER }}
-          TARGET: "/home/ubuntu/backend/dotnet"
+          SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
+          SOURCE: "backend/HaveLunch/bin/Release/net8.0/publish/*"
+          REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
+          REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
+          TARGET: "/var/www/HaveLunch/HaveLunch.Dev/"
 
   run-tests:
     runs-on: "ubuntu-latest"
@@ -92,8 +92,8 @@ jobs:
       - name: deploy to uat
         uses: easingthemes/ssh-deploy@v2.1.5 
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          SOURCE: "backend/HaveLunch/bin/net8.0/Release/publish/*"
-          REMOTE_HOST: ${{ secrets.HOSTNAME }}
-          REMOTE_USER: ${{ secrets.USER }}
-          TARGET: "/home/ubuntu/backend/dotnet/"
+          SSH_PRIVATE_KEY: ${{ secrets.ALTERNATE_SSH_KEY }}
+          SOURCE: "backend/HaveLunch/bin/Release/net8.0/publish/*"
+          REMOTE_HOST: ${{ secrets.ALTERNATE_HOSTNAME }}
+          REMOTE_USER: ${{ secrets.ALTERNATE_USER }}
+          TARGET: "/var/www/HaveLunch/HaveLunch.Prod/"
