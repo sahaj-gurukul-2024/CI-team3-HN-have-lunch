@@ -12,7 +12,10 @@ public class AdminController(IAdminService adminService) : Controller
     {
         try
         {
-            var dateOnly = DateOnly.Parse(date);
+            if(!DateOnly.TryParse(date, out var dateOnly))
+            {
+                dateOnly = DateOnly.FromDateTime(DateTime.Today);
+            }
             return Ok(await adminService.GetLunchAttendanceCount(dateOnly));
         }
         catch (Exception ex)
@@ -22,11 +25,14 @@ public class AdminController(IAdminService adminService) : Controller
     }
 
     [HttpGet("list")]
-    public async Task<IActionResult> GetLunchAttendanceList(string date, int page = 1)
+    public async Task<IActionResult> GetLunchAttendanceList(string date = "", int page = 1)
     {
         try
         {
-            var dateOnly = DateOnly.Parse(date);
+            if(!DateOnly.TryParse(date, out var dateOnly))
+            {
+                dateOnly = DateOnly.FromDateTime(DateTime.Today);
+            }
             return Ok(await adminService.GetLunchAttendanceList(dateOnly, page));
         }
         catch (Exception ex)

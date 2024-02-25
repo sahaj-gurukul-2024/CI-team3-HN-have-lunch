@@ -9,7 +9,7 @@ namespace HaveLunch.Controllers;
 public class EmployeeAttendanceController(IEmployeeAttendanceService employeeAttendanceService) : Controller
 {
     [HttpGet("{employeeId:int}")]
-    public async Task<IActionResult> GetAttendanceDetail(int employeeId, string date)
+    public async Task<IActionResult> GetAttendanceDetail(int employeeId, string date = "")
     {
         try
         {
