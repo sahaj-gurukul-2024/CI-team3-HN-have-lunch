@@ -42,10 +42,9 @@ function LoginPage() {
       <h1 className="text-center">Welcome to Office Lunch Tracker</h1>
 
       <Form onSubmit={login} className="align-self-stretch">
-        <Form.Group className="mt-5 mb-4">
+        <Form.Group className="mt-5 mb-4" controlId="id">
           <Form.Label>Employee Id</Form.Label>
           <Form.Control
-            id="id"
             name="id"
             type="text"
             placeholder="Enter your employee id"
@@ -54,10 +53,9 @@ function LoginPage() {
             }}
             />
         </Form.Group>
-        <Form.Group className="mb-5">
+        <Form.Group className="mb-5" controlId="name">
           <Form.Label>Employee name</Form.Label>
           <Form.Control
-            id="name"
             name="name"
             type="text"
             placeholder="Enter your employee name"
