@@ -20,7 +20,7 @@ var app = builder.Build();
 app.UseCors();
 app.UseRouting();
 
-app.MapGet("/health-checkg", () => "Hello World!");
+app.MapGet("/healthz", () => "Hello World!");
 
 app.MapControllers();
 

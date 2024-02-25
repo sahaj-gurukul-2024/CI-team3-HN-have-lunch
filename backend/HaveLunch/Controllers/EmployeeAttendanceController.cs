@@ -8,13 +8,16 @@ namespace HaveLunch.Controllers;
 [Route("attendance")]
 public class EmployeeAttendanceController(IEmployeeAttendanceService employeeAttendanceService) : Controller
 {
-    [HttpGet("get")]
+    [HttpGet("{employeeId:int}")]
     public async Task<IActionResult> GetAttendanceDetail(int employeeId, string date)
     {
         try
         {
-            var dateTime = DateTime.Parse(date).ToUniversalTime();
-            return Ok(await employeeAttendanceService.GetEmployeeAttendanceDetail(employeeId, dateTime));
+            if(!DateTime.TryParse(date, out var dateTime))
+            {
+                dateTime = DateTime.UtcNow.Date;
+            }
+            return Ok(await employeeAttendanceService.GetEmployeeAttendanceDetail(employeeId, dateTime.Date));
         }
         catch (Exception e)
         {
@@ -35,7 +38,7 @@ public class EmployeeAttendanceController(IEmployeeAttendanceService employeeAtt
         }
     }
 
-    [HttpGet("{employeeId:int}")]
+    [HttpGet("history/{employeeId:int}")]
     public async Task<IActionResult> GetEmployeeAttendanceHistory(int employeeId, int page = 1)
     {
         try

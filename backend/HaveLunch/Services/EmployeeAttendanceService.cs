@@ -93,7 +93,14 @@ public class EmployeeAttendanceService(AppDbContext appDbContext) : IEmployeeAtt
                             .OrderByDescending(x => x.Date)
                             .Skip((page - 1) * pageSize)
                             .Take(pageSize)
-                            .Select(x => new EmployeeAttendanceResponse())
+                            .Include(x => x.Employee)
+                            .Select(x => new EmployeeAttendanceResponse(){
+                                Id = x.Id,
+                                EmployeeId = x.EmployeeId,
+                                EmployeeName = x.Employee.Name,
+                                Date = x.Date,
+                                Status = x.Status
+                                })
                             .ToListAsync();
         return employees;
     }
