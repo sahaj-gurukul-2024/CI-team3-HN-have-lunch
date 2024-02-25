@@ -1,6 +1,4 @@
-import Login from "../Login.jsx";
-import Home from "../Home.jsx";
-import Admin from "../Admin.jsx";
+import {Login, Home, Admin} from "../pages"
 import { createBrowserRouter } from "react-router-dom";
 
 export const path = {
