@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { path } from "./utils/constants";
-import {apiEndpoints} from "./utils/apiEndpoints";
+import { apiEndpoints } from "./utils/apiEndpoints";
 
 function App() {
   const navigate = useNavigate();
@@ -36,14 +36,14 @@ function App() {
     if (localStorage.getItem("login") != null) {
       navigate(path.home, { replace: true });
     }
-  }, [])
+  }, []);
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center vh-100 w-50">
       <h1>Welcome to Office Lunch Tracker</h1>
-      
+
       <Form onSubmit={login} className="align-self-stretch">
-        <Form.Group className="mt-5 mb-4" >
+        <Form.Group className="mt-5 mb-4">
           <Form.Label>Employee Id</Form.Label>
           <Form.Control
             id="id"
@@ -55,7 +55,7 @@ function App() {
             }}
           />
         </Form.Group>
-        <Form.Group className="mb-5" >
+        <Form.Group className="mb-5">
           <Form.Label>Employee name</Form.Label>
           <Form.Control
             id="name"
@@ -72,7 +72,9 @@ function App() {
             Login
           </Button>
           <div className="me-3" />
-          <Link to={path.admin} className="bg-primary btn text-light w-100">Go to Admin</Link>
+          <Link to={path.admin} className="bg-primary btn text-light w-100">
+            Go to Admin
+          </Link>
         </div>
       </Form>
     </Container>
