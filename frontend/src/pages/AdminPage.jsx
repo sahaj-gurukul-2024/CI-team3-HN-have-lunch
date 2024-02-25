@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import { getDate, apiEndpoints } from "../utils";
 import {CustomModal, Loader} from "../components";
+import { compareDate } from "../utils/date";
 
 function AdminPage() {
   const [employeeCount, setEmployeeCount] = useState(null);
@@ -84,7 +85,7 @@ function AdminPage() {
           </tbody>
         </Table>
       </CustomModal>
-      <Container className="d-flex flex-column align-items-center justify-content-center vh-100 w-25">
+      <Container className="d-flex flex-column align-items-center justify-content-center vh-100 col-sm-10 col-md-8 col-lg-6 col-xl-5">
         <h1 className="welcomeMessage mb-5">Welcome Admin</h1>
         <h3>
           Date:{" "}
@@ -99,7 +100,7 @@ function AdminPage() {
           <p>
             <span className="employeeCount">{employeeCount}</span>{" "}
             {employeeCount === 1 ? "person" : "people"}{" "}
-            {date.toLocaleDateString() >= new Date().toLocaleDateString()
+            {compareDate(date, new Date()) >= 0
               ? "are coming"
               : "came"}{" "}
             to Office{" "}
