@@ -1,5 +1,5 @@
 import { getDate } from "./date";
-import { path, router } from "./constants";
+import { path, router } from "./routes";
 import { apiEndpoints, baseUrl } from "./apiEndpoints";
 
 export {
