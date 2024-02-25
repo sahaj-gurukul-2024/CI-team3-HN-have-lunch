@@ -38,8 +38,8 @@ function LoginPage() {
   }, []);
 
   return (
-    <Container className="d-flex flex-column align-items-center justify-content-center vh-100 w-50">
-      <h1>Welcome to Office Lunch Tracker</h1>
+    <Container className="d-flex flex-column align-items-center justify-content-center vh-100 col-sm-12 col-md-10 col-lg-8 col-xl-6">
+      <h1 className="text-center">Welcome to Office Lunch Tracker</h1>
 
       <Form onSubmit={login} className="align-self-stretch">
         <Form.Group className="mt-5 mb-4">
@@ -52,7 +52,7 @@ function LoginPage() {
             onChange={(e) => {
               setId(e.target.value);
             }}
-          />
+            />
         </Form.Group>
         <Form.Group className="mb-5">
           <Form.Label>Employee name</Form.Label>
@@ -64,7 +64,7 @@ function LoginPage() {
             onChange={(e) => {
               setName(e.target.value);
             }}
-          />
+            />
         </Form.Group>
         <div className="cta d-flex justify-content-between">
           <Button variant="primary" type="submit" className="w-100">
@@ -76,6 +76,7 @@ function LoginPage() {
           </Link>
         </div>
       </Form>
+      
     </Container>
   );
 }
