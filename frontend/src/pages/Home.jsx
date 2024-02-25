@@ -5,9 +5,9 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
-import { path } from "./utils/constants";
-import { apiEndpoints } from "./utils/apiEndpoints";
-import { getDate } from "./utils/date";
+import { path } from "../utils/constants";
+import { apiEndpoints } from "../utils/apiEndpoints";
+import { getDate } from "../utils/date";
 
 function Home() {
   const navigate = useNavigate();

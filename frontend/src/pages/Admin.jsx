@@ -3,10 +3,10 @@ import Container from "react-bootstrap/Container";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
-import { apiEndpoints } from "./utils/apiEndpoints";
-import Loader from "./Loader.jsx";
-import { getDate } from "./utils/date.js";
-import CustomModal from "./Modal.jsx";
+import { apiEndpoints } from "../utils/apiEndpoints.js";
+import Loader from "../Loader.jsx";
+import { getDate } from "../utils/date.js";
+import CustomModal from "../Modal.jsx";
 
 function Admin() {
   const [employeeCount, setEmployeeCount] = useState(null);
