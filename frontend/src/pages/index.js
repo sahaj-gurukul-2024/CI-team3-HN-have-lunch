@@ -1,9 +1,11 @@
-import Home from "./Home";
-import Admin from "./Admin";
-import Login from "./Login"
+import HomePage from "./HomePage";
+import AdminPage from "./AdminPage";
+import LoginPage from "./LoginPage";
+import NotFoundPage from "./NotFoundPage";
 
 export {
-    Home, 
-    Admin,
-    Login
+    HomePage, 
+    AdminPage,
+    LoginPage,
+    NotFoundPage
 }

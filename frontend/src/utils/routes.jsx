@@ -1,4 +1,4 @@
-import {Login, Home, Admin} from "../pages"
+import {LoginPage, HomePage, AdminPage, NotFoundPage} from "../pages"
 import { createBrowserRouter } from "react-router-dom";
 
 export const path = {
@@ -10,14 +10,18 @@ export const path = {
 export const router = createBrowserRouter([
   {
     path: path.home,
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: path.login,
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
     path: path.admin,
-    element: <Admin />,
+    element: <AdminPage />,
   },
+  {
+    path: "*",
+    element: <NotFoundPage />
+  }
 ]);

@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { path, apiEndpoints } from "../utils";
 
-function App() {
+function LoginPage() {
   const navigate = useNavigate();
   const [id, setId] = useState(null);
   const [name, setName] = useState(null);
@@ -80,4 +80,4 @@ function App() {
   );
 }
 
-export default App;
+export default LoginPage;

@@ -6,7 +6,7 @@ import Table from "react-bootstrap/Table";
 import { getDate, apiEndpoints } from "../utils";
 import {CustomModal, Loader} from "../components";
 
-function Admin() {
+function AdminPage() {
   const [employeeCount, setEmployeeCount] = useState(null);
   const [date, setDate] = useState(new Date());
   const [modalShow, setModalShow] = useState(false);
@@ -137,4 +137,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default AdminPage;

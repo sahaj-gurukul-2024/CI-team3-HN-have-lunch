@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Toast from "react-bootstrap/Toast";
 import { path, apiEndpoints, getDate } from "../utils";
 
-function Home() {
+function HomePage() {
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -152,4 +152,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
