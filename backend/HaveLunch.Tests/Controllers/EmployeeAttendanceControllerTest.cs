@@ -15,7 +15,7 @@ public class EmployeeAttendanceControllerTest
         var service = new StubEmployeeAttendanceService();
         var controller = new EmployeeAttendanceController(service);
 
-        var result = await controller.GetAttendanceDetail(1, "25/05/2023");
+        var result = await controller.GetAttendanceDetail(1, "2023-05-25");
 
         var returnValue = Assert.IsAssignableFrom<OkObjectResult>(result).Value as EmployeeAttendanceResponse;
         Assert.Equal(1, returnValue.Id);
@@ -31,7 +31,7 @@ public class EmployeeAttendanceControllerTest
         var service = new StubEmployeeAttendanceService();
         var controller = new EmployeeAttendanceController(service);
 
-        var result = await controller.GetAttendanceDetail(5, "25/05/2023");
+        var result = await controller.GetAttendanceDetail(5, "2023-05-25");
 
         var returnValue = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
         Assert.Equal(StatusCodes.Status400BadRequest, returnValue.StatusCode);

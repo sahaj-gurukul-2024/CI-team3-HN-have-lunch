@@ -14,9 +14,9 @@ public class AdminControllerTest
         var service = new StubAdminService();
         var controller = new AdminController(service);
 
-        var result1 = await controller.GetLunchAttendanceCount("25/05/2023");
-        var result2 = await controller.GetLunchAttendanceCount("26/05/2023");
-        var result3 = await controller.GetLunchAttendanceCount("27/05/2023");
+        var result1 = await controller.GetLunchAttendanceCount("2023-05-25");
+        var result2 = await controller.GetLunchAttendanceCount("2023-05-26");
+        var result3 = await controller.GetLunchAttendanceCount("2023-05-27");
 
         var returnValue1 = Assert.IsAssignableFrom<OkObjectResult>(result1).Value as AdminCountResponse;
         var returnValue2 = Assert.IsAssignableFrom<OkObjectResult>(result2).Value as AdminCountResponse;
@@ -45,9 +45,9 @@ public class AdminControllerTest
         var service = new StubAdminService();
         var controller = new AdminController(service);
 
-        var result1 = await controller.GetLunchAttendanceList("25/05/2023");
-        var result2 = await controller.GetLunchAttendanceList("26/05/2023");
-        var result3 = await controller.GetLunchAttendanceList("27/05/2023");
+        var result1 = await controller.GetLunchAttendanceList("2023-05-25");
+        var result2 = await controller.GetLunchAttendanceList("2023-05-26");
+        var result3 = await controller.GetLunchAttendanceList("2023-05-27");
 
         var returnValue1 = Assert.IsAssignableFrom<OkObjectResult>(result1).Value as List<EmployeeResponse>;
         var returnValue2 = Assert.IsAssignableFrom<OkObjectResult>(result2).Value as List<EmployeeResponse>;
@@ -69,7 +69,7 @@ public class AdminControllerTest
         var service = new StubAdminService();
         var controller = new AdminController(service);
 
-        var result = await controller.GetLunchAttendanceList("2505/2023");
+        var result = await controller.GetLunchAttendanceList("2023-0525");
         
         var returnValue = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
         Assert.Equal(StatusCodes.Status400BadRequest, returnValue.StatusCode);
