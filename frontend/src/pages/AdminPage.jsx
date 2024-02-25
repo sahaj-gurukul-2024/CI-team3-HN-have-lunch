@@ -100,7 +100,7 @@ function AdminPage() {
           <p>
             <span className="employeeCount">{employeeCount}</span>{" "}
             {employeeCount === 1 ? "person" : "people"}{" "}
-            {compareDate(date, new Date()) >= 0
+            {date.setHours(0, 0, 0, 0) >= new Date().setHours(0, 0, 0, 0,)
               ? "are coming"
               : "came"}{" "}
             to Office{" "}
