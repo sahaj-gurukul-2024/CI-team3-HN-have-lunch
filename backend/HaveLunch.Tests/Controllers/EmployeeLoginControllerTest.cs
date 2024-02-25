@@ -1,6 +1,6 @@
 using HaveLunch.Controllers;
-using HaveLunch.Entities;
 using HaveLunch.Models;
+using HaveLunch.Tests.Stubs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HaveLunch.Tests.Controllers;
