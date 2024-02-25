@@ -14,7 +14,14 @@ public class AdminController(IAdminService adminService) : Controller
         {
             if(!DateOnly.TryParse(date, out var dateOnly))
             {
-                dateOnly = DateOnly.FromDateTime(DateTime.Today);
+                if(string.IsNullOrWhiteSpace(date))
+                {
+                    dateOnly = DateOnly.FromDateTime(DateTime.Today);
+                }
+                else
+                {
+                    throw new Exception("Invalid Date Format");
+                }
             }
             return Ok(await adminService.GetLunchAttendanceCount(dateOnly));
         }
@@ -31,7 +38,14 @@ public class AdminController(IAdminService adminService) : Controller
         {
             if(!DateOnly.TryParse(date, out var dateOnly))
             {
-                dateOnly = DateOnly.FromDateTime(DateTime.Today);
+                if(string.IsNullOrWhiteSpace(date))
+                {
+                    dateOnly = DateOnly.FromDateTime(DateTime.Today);
+                }
+                else
+                {
+                    throw new Exception("Invalid Date Format");
+                }
             }
             return Ok(await adminService.GetLunchAttendanceList(dateOnly, page));
         }
