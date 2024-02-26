@@ -66,7 +66,7 @@ jobs:
       - name: "Run Tests"
         run: |
           cd frontend
-          npm run dev & 
+          npm run dev --host & 
           npm test
         env:
           VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
