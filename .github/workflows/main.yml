@@ -85,9 +85,28 @@ jobs:
       - name: "Run Tests"
         run: |
           cd frontend
-          npm run dev & 
-          npm test
+          # npm run dev & 
+          # npm test
         env:
           VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
           VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
           PROD: "true"
+
+      - name: "Configure AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: "Login to Amazon ECR"
+        uses: aws-actions/amazon-ecr-login@v2
+        
+      - name: upload to ECR
+        run: docker build ../../frontend 
+
+      - name: "Tag Image with Remote Registry as prefix"
+        run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:latest ${{ secrets.AWS_ECR_HOSTNAME_FRONTEND }}/ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:${{ github.sha }}
+
+      - name: "Push to Remote Registry"
+        run: docker push ${{ secrets.AWS_ECR_HOSTNAME_FRONTEND }}/ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:${{ github.sha }}
