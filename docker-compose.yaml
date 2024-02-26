@@ -3,7 +3,7 @@ version: '3.9'
 services:
   db:
     container_name: Lunch-Postgres
-    image: postgres:12.18
+    image: postgres
     ports:
       - 5432:5432
     environment:
@@ -14,15 +14,22 @@ services:
   emp-lunch-backend:
     container_name: lunch-backend
     ports:
-      - 8080:8080
+      - 5000:5000
     environment:
-      VITE_HOST_URL: 1
+      ConnectionStrings__PostgresConnection: "Server=db;Port=5432;Database=Lunch-Database;User Id=postgres;Password=Lunch123;URL: 1"
     build:
-      context: HaveLunch
+      context: backend
     depends_on:
       - db
 
-
+  lunch-frontend:
+    container_name: lunch-frontend
+    build:
+      context: frontend
+    ports:
+      - 80:80
+    environment:
+      - NGINX_PORT=80
 
 volumes:
   lunch-data:
