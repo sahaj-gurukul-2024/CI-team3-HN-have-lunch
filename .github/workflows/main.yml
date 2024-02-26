@@ -103,7 +103,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         
       - name: upload to ECR
-        run: docker build ../../frontend 
+        run: |
+          cd frontend
+          docker build . 
 
       - name: "Tag Image with Remote Registry as prefix"
         run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:latest ${{ secrets.AWS_ECR_HOSTNAME_FRONTEND }}/ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:${{ github.sha }}
