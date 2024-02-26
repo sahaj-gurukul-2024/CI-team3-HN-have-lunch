@@ -25,14 +25,8 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: cleanup
-        run: dotnet clean HaveLunch.sln
-
       - name: restore dependencies
         run: dotnet restore HaveLunch.sln
-
-      - name: build
-        run: dotnet build
 
       - name: test
         run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
