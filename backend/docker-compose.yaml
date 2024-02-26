@@ -11,5 +11,18 @@ services:
     volumes:
       - lunch-data:/var/lib/postgresql/data
 
+  emp-lunch-backend:
+    container_name: lunch-backend
+    ports:
+      - 8080:8080
+    environment:
+      VITE_HOST_URL: 1
+    build:
+      context: HaveLunch
+    depends_on:
+      - db
+
+
+
 volumes:
   lunch-data:
