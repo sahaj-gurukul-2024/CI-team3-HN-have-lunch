@@ -63,13 +63,10 @@ jobs:
       - name: "Setup Chrome"
         uses: browser-actions/setup-chrome@v1
 
-      - name: "Run server"
-        run: |
-          cd frontend
-          npm run dev
       - name: "Run Tests"
         run: |
           cd frontend
+          npm run dev & 
           npm test
         env:
           VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
