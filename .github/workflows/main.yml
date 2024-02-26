@@ -9,7 +9,7 @@ on:
 
 
 jobs:
-  push-backend-to-uat:
+  build and run test:
     runs-on: "ubuntu-latest"
     name: "Push Backend to UAT"
     defaults:
