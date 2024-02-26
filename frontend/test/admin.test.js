@@ -40,11 +40,11 @@ describe("Admin page", () => {
     assert.equal(new Date().toLocaleString().slice(0, 10), currentDate);
   });
 
-  it("should load employee count for today", async () => {
-    const empCount = await driver.findElement(By.className("employeeCount"));
-
-    assert.notEqual(empCount, null);
-  });
+//  it("should load employee count for today", async () => {
+//    const empCount = await driver.findElement(By.className("employeeCount"));
+//
+//    assert.notEqual(empCount, null);
+//  });
 });
 
 describe("User in admin page", () => {

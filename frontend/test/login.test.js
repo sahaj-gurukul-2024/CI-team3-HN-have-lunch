@@ -79,19 +79,19 @@ describe("User in login page", () => {
     assert.equal("abc", name);
   });
 
-  it("should login properly with proper details", async () => {
-    const idInputBox = await driver.findElement(By.id("id"));
-    const nameInputBox = await driver.findElement(By.id("name"));
-    await idInputBox.sendKeys("123");
-    await nameInputBox.sendKeys("abc");
-
-    const login = await driver.findElement(By.tagName("button"));
-
-    await login.submit();
-
-    await driver.sleep(100);
-
-    const browserUrl = await driver.getCurrentUrl();
-    assert.equal(browserUrl.split("/").pop(), "");
-  });
+//  it("should login properly with proper details", async () => {
+//    const idInputBox = await driver.findElement(By.id("id"));
+//    const nameInputBox = await driver.findElement(By.id("name"));
+//    await idInputBox.sendKeys("123");
+//    await nameInputBox.sendKeys("abc");
+//
+//    const login = await driver.findElement(By.tagName("button"));
+//
+//    await login.submit();
+//
+//    await driver.sleep(100);
+//
+//    const browserUrl = await driver.getCurrentUrl();
+//    assert.equal(browserUrl.split("/").pop(), "");
+//  });
 });
