@@ -35,4 +35,4 @@ jobs:
         run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
 
       - name: build artifact
-        run: dotnet publish HaveLunch/HaveLunch.csproj -c Release -o /app/publish
+        run: dotnet publish HaveLunch/HaveLunch.csproj -c Release -o ./publish
