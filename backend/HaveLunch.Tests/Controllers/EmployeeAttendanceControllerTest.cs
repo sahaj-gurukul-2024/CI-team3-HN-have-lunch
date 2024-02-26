@@ -1,0 +1,105 @@
+﻿using HaveLunch.Controllers;
+using HaveLunch.Enums;
+using HaveLunch.Models;
+using HaveLunch.Tests.Stubs;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace HaveLunch.Tests;
+
+public class EmployeeAttendanceControllerTest
+{
+    [Fact]
+    public async Task GetAttendanceDetail_ShouldReturnOk_ForValidEmployeeId()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+
+        var result = await controller.GetAttendanceDetail(1, "2023-05-25");
+
+        var returnValue = Assert.IsAssignableFrom<OkObjectResult>(result).Value as EmployeeAttendanceResponse;
+        Assert.Equal(1, returnValue.Id);
+        Assert.Equal(1, returnValue.EmployeeId);
+        Assert.Equal("Bruce", returnValue.EmployeeName);
+        Assert.Equal(new DateOnly(2023, 05, 25), returnValue.Date);
+        Assert.Equal(AttendanceStatus.YES, returnValue.Status);
+    }
+    
+    [Fact]
+    public async Task GetAttendanceDetail_ShouldReturnBadRequest_ForInvalidEmployeeId_WhenGettingException()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+
+        var result = await controller.GetAttendanceDetail(5, "2023-05-25");
+
+        var returnValue = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+        Assert.Equal(StatusCodes.Status400BadRequest, returnValue.StatusCode);
+    }
+    
+    [Fact]
+    public async Task GetEmployeeAttendanceHistory_ShouldReturnOk_ForValidEmployeeId()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+
+        var result = await controller.GetEmployeeAttendanceHistory(1);
+
+        var returnValue = Assert.IsAssignableFrom<OkObjectResult>(result).Value as List<EmployeeAttendanceResponse>;
+        Assert.True(returnValue.All(x => x.EmployeeId == 1));
+    }
+
+    [Fact]
+    public async Task GetEmployeeAttendanceHistory_ShouldReturnBadRequest_ForInvalidEmployeeId_WhenGettingException()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+
+        var result = await controller.GetEmployeeAttendanceHistory(5);
+
+        var returnValue = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+        Assert.Equal(StatusCodes.Status400BadRequest, returnValue.StatusCode);
+    }
+    
+    [Fact]
+    public async Task CreateOrUpdateEmployeeAttendance_ShouldReturnOk_ForValidEmployeeId()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+        var dateTime = DateTime.Today;
+
+        var request = new EmployeeAttendanceRequest()
+        {
+            Employee = new EmployeeResponse(1, "Bruce"),
+            Date = DateOnly.FromDateTime(dateTime),
+            Status = AttendanceStatus.YES
+        };
+        var result = await controller.CreateOrUpdateEmployeeAttendanceDetail(request);
+
+        var returnValue = Assert.IsAssignableFrom<OkObjectResult>(result).Value as EmployeeAttendanceResponse;
+        Assert.Equal(1, returnValue.Id);
+        Assert.Equal(1, returnValue.EmployeeId);
+        Assert.Equal("Bruce", returnValue.EmployeeName);
+        Assert.Equal(request.Date, returnValue.Date);
+        Assert.Equal(AttendanceStatus.YES, returnValue.Status);
+    }
+    
+    [Fact]
+    public async Task gCreateOrUpdateEmployeeAttendance_ShouldReturnBadRequest_ForInvalidAttendanceStatus_WhenGettingException()
+    {
+        var service = new StubEmployeeAttendanceService();
+        var controller = new EmployeeAttendanceController(service);
+        var dateTime = DateTime.Today;
+
+        var request = new EmployeeAttendanceRequest()
+        {
+            Employee = new EmployeeResponse(1, "Bruce"),
+           Date = DateOnly.FromDateTime(dateTime),
+            Status = AttendanceStatus.NOT_SPECIFIED
+        };
+        var result = await controller.CreateOrUpdateEmployeeAttendanceDetail(request);
+
+        var returnValue = Assert.IsAssignableFrom<BadRequestObjectResult>(result);
+        Assert.Equal(StatusCodes.Status400BadRequest, returnValue.StatusCode);
+    }
+}
