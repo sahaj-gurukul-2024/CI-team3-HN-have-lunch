@@ -32,6 +32,9 @@ jobs:
         run: dotnet restore HaveLunch.sln
 
       - name: build
+        run: dotnet build
+
+      - name: test
         run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
 
       - name: "Configure AWS Credentials"
@@ -43,15 +46,6 @@ jobs:
 
       - name: "Login to Amazon ECR"
         uses: aws-actions/amazon-ecr-login@v2
-
-      - name: "Restore Packages"
-        run: dotnet restore backend/HaveLunch.sln
-
-      - name: "Build Source"
-        run: dotnet build backend/HaveLunch.sln
-
-      - name: "Run Tests"
-        run: dotnet test backend/HaveLunch.Tests/HaveLunch.Tests.csproj
 
       - name: "Publish Docker Image"
         run: dotnet publish backend/HaveLunch/HaveLunch.csproj --configuration Release /t:PublishContainer
