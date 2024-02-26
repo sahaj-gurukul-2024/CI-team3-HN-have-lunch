@@ -23,4 +23,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.100'
+          dotnet-version: '8.0.2'
+
+      - name: cleanup
+        run: dotnet clean HaveLunch.sln
+
+      - name: restore dependencies
+        run: dotnet restore HaveLunch.sln
+
+      - name: build
+        run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
+
+      - name: build artifact
+        run: dotnet publish HaveLunch/HaveLunch.csproj -c Release -o /app/publish
