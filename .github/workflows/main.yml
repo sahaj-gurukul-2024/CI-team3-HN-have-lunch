@@ -36,3 +36,38 @@ jobs:
 
       - name: build artifact
         run: dotnet publish HaveLunch/HaveLunch.csproj -c Release -o ./publish
+
+
+  run-bdd:
+    runs-on: "ubuntu-latest"
+    name: "Frontend Build"
+    needs: build-and-run-test
+    steps:
+      - name: "Checkout branch"
+        uses: actions/checkout@v4
+
+      - name: "Setup Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.11.1"
+
+      - name: "Install Dependencies"
+        run: |
+          cd frontend
+          npm ci
+        env:
+          VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
+          VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+          PROD: "true"
+
+      - name: "Setup Chrome"
+        uses: browser-actions/setup-chrome@v1
+
+      - name: "Run Tests"
+        run: |
+          cd frontend
+          npm test
+        env:
+          VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
+          VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
+          PROD: "true"
