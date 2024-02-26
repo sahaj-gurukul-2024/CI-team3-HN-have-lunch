@@ -11,7 +11,7 @@ on:
 jobs:
   build-and-run-test:
     runs-on: "ubuntu-latest"
-    name: "Push Backend to UAT"
+    name: "CI backend"
     defaults:
       run:
         working-directory: './backend/'
