@@ -1,0 +1,26 @@
+name: team3-have-lunch
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+
+jobs:
+  push-backend-to-uat:
+    runs-on: "ubuntu-latest"
+    name: "Push Backend to UAT"
+    defaults:
+      run:
+        working-directory: './backend/'
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.100'
