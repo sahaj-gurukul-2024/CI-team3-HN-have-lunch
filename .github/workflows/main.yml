@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.2'
+          dotnet-version: '8.0.x'
 
       - name: cleanup
         run: dotnet clean HaveLunch.sln
