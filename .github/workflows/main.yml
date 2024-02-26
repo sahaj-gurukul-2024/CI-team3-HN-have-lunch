@@ -48,7 +48,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: "Publish Docker Image"
-        run: dotnet publish backend/HaveLunch/HaveLunch.csproj --configuration Release /t:PublishContainer
+        run: dotnet publish HaveLunch/HaveLunch.csproj --configuration Release /t:PublishContainer
 
       - name: "Tag Image with Remote Registry as prefix"
         run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch:latest ${{ secrets.AWS_ECR_HOSTNAME }}/ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
