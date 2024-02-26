@@ -105,7 +105,7 @@ jobs:
       - name: upload to ECR
         run: |
           cd frontend
-          docker build . 
+          docker build -t ci-gurukul-team3-harshit-nikhil-have-lunch-frontend .
 
       - name: "Tag Image with Remote Registry as prefix"
         run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:latest ${{ secrets.AWS_ECR_HOSTNAME_FRONTEND }}/ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:${{ github.sha }}
