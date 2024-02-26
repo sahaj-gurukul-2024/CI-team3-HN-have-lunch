@@ -34,16 +34,6 @@ jobs:
       - name: build
         run: dotnet test HaveLunch.Tests/HaveLunch.Tests.csproj
 
-      - name: build artifact
-        run: dotnet publish HaveLunch/HaveLunch.csproj -c Release -o ./publish
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registries: ${{ secrets.AWS_ACCESS_KEY }}
-          mask-password: "true" # see: https://github.com/aws-actions/amazon-ecr-login#docker-credentials
-
       - name: "Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v4
         with:
