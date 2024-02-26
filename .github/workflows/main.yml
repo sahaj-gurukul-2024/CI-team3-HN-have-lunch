@@ -61,13 +61,13 @@ jobs:
         run: dotnet build backend/HaveLunch.sln
 
       - name: "Run Tests"
-        run: dotnet test backend/HaveLunch.Tests/HaveLunch.Tests.csprojREGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        run: dotnet test backend/HaveLunch.Tests/HaveLunch.Tests.csproj
 
       - name: "Publish Docker Image"
         run: dotnet publish backend/HaveLunch/HaveLunch.csproj --configuration Release /t:PublishContainer
 
       - name: "Tag Image with Remote Registry as prefix"
-        run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch:latest ${{ secrets.AWS_ECR_HOSTNAME }}/	ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
+        run: docker tag ci-gurukul-team3-harshit-nikhil-have-lunch:latest ${{ secrets.AWS_ECR_HOSTNAME }}/ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
 
       - name: "Push to Remote Registry"
         run: docker push ${{ secrets.AWS_ECR_HOSTNAME }}/ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
