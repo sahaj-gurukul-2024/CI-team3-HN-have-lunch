@@ -54,7 +54,7 @@ jobs:
   run-bdd:
     runs-on: self-hosted
     name: "Frontend Build"
-    needs: build-and-run-test
+    # needs: build-and-run-test
     steps:
       - name: "Checkout branch"
         uses: actions/checkout@v4
