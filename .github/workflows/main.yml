@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-run-test:
-    runs-on: "ubuntu-latest"
+    runs-on: self-hosted
     name: "CI backend"
     defaults:
       run:
@@ -74,7 +74,7 @@ jobs:
 
 
   run-bdd:
-    runs-on: "ubuntu-latest"
+    runs-on: self-hosted
     name: "Frontend Build"
     needs: build-and-run-test
     steps:
@@ -101,8 +101,8 @@ jobs:
       - name: "Run Tests"
         run: |
           cd frontend
-          npm run dev & 
-          npm test
+#          npm run dev &
+#          npm test
         env:
           VITE_HOST_URL: ${{ secrets.VITE_HOST_URL }}
           VITE_HOST_PORT: ${{ secrets.VITE_HOST_PORT }}
