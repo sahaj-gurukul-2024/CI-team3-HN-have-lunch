@@ -50,7 +50,6 @@ jobs:
       - name: "Push to Remote Registry"
         run: docker push ${{ secrets.AWS_ECR_HOSTNAME }}/ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
 
-
   run-bdd:
     runs-on: self-hosted
     name: "Frontend Build"
@@ -106,3 +105,20 @@ jobs:
 
       - name: "Push to Remote Registry"
         run: docker push ${{ secrets.AWS_ECR_HOSTNAME_FRONTEND }}/ci-gurukul-team3-harshit-nikhil-have-lunch-frontend:${{ github.sha }}
+
+  deploy-to-dev:
+    runs-on: self-hosted
+    name: "deploy to dev environment"
+
+    steps:
+      - name: "ssh to server"
+        uses: appleboy/ssh-actions@1.03
+        with:
+          host: 192.168.1.226
+          username: nikhils
+          password: ${{ secrets.PASSWORD_DONT_SEE }}
+          script: |
+            docker pull ${{ secrets.AWS_ECR_HOSTNAME }}/ci-gurukul-team3-harshit-nikhil-have-lunch:${{ github.sha }}
+
+
+
